@@ -21,6 +21,10 @@ import {
   orderMyListReducer
 } from "./orderReducer"
 
+import {
+  userListReducer
+} from "./adminReducer"
+
 export { 
   userLoginReducer, 
   userSignupReducer, 
@@ -32,5 +36,6 @@ export {
   orderCreateReducer,
   orderDetailReducer ,
   orderPayReducer,
-  orderMyListReducer
+  orderMyListReducer,
+  userListReducer
 }

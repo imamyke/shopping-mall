@@ -13,7 +13,8 @@ import {
   orderCreateReducer,
   orderDetailReducer,
   orderPayReducer,
-  orderMyListReducer
+  orderMyListReducer,
+  userListReducer
 } from './reducers'
 
 // initialState
@@ -43,7 +44,8 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetail: orderDetailReducer,
   orderPay: orderPayReducer,
-  orderMyList: orderMyListReducer
+  orderMyList: orderMyListReducer,
+  userList: userListReducer
 })
 
 // enhancer

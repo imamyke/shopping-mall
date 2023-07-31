@@ -5,4 +5,15 @@ import Cart from './Cart'
 import ProductDetail from './ProductDetail'
 import Profile from './Profile'
 
-export { Home, Login, Signup, Cart, ProductDetail, Profile}
+// admin pages
+import UserList from './admin/UserList'
+
+export { 
+  Home, 
+  Login, 
+  Signup, 
+  Cart, 
+  ProductDetail, 
+  Profile,
+  UserList
+}

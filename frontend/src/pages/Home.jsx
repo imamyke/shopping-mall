@@ -38,6 +38,13 @@ const Home = () => {
       <StyledHeader>
         <StyledNavbarContainer>
           <Row justify="end" style={{ textAlign: 'center'}}>
+          { userInfo && userInfo.isAdmin && (
+              <Col span={2} key="6">
+                <Link to='/'>
+                  後台管理
+                </Link>
+              </Col>
+            )}
             <Col span={2} key="2">
               <Link to='/'>
                 <i className="fas fa-shopping-cart"></i>Cart

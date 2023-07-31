@@ -1,5 +1,13 @@
 import { Routes, Route } from "react-router-dom"
-import { Home, Login, Signup, Cart, ProductDetail, Profile} from './pages'
+import { 
+  Home, 
+  Login,
+  Signup, 
+  Cart, 
+  ProductDetail, 
+  Profile,
+  UserList
+} from './pages'
 
 function App() {
   return (
@@ -11,6 +19,7 @@ function App() {
       <Route exact path='/cart' element={<Cart />} />
       <Route exact path='/cart/:id' element={<Cart />} />
       <Route exact path='/profile' element={<Profile />} />
+      <Route exact path='/admin/userlist' element={<UserList />} />
     </Routes>
   );
 }

@@ -12,6 +12,10 @@ import {
   myOrderListAction
 } from "./orderAction"
 
+import {
+  listUser
+} from "./adminActions"
+
 export { 
   login, 
   logout, 
@@ -26,5 +30,6 @@ export {
   savePaymentMethodsAction,
   createOrderAction,
   getOrderDetailAction,
-  myOrderListAction
+  myOrderListAction,
+  listUser
 }
