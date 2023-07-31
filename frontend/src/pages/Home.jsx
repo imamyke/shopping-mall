@@ -12,11 +12,14 @@ import { logout } from '../store/actions'
 const Home = () => {
   
   const dispatch = useDispatch()
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
   const results = useSelector(state => state.productList)
   const { loading, productList, error } = results
   const handleLogout = async () => {
     dispatch(logout())
   }
+
   const items = [
     {
       key: '1',
@@ -44,7 +47,11 @@ const Home = () => {
             <Dropdown menu={{ items }}>
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
-                  <Link to="/login">登入</Link>
+                  { userInfo ? (
+                    <div>{userInfo.name}</div>
+                  ) : (
+                    <Link to="/login">登入</Link>
+                  )}
                   <DownOutlined />
                 </Space>
               </a>
