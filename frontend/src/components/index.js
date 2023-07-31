@@ -1,4 +1,5 @@
 import ProductCard from './ProductCard'
 import Footer from './Footer'
+import Loader from './Loader'
 
-export { ProductCard, Footer }
+export { ProductCard, Footer, Loader }

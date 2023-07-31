@@ -1,17 +1,17 @@
 import styled from 'styled-components'
 
-const ProductCard = () => {
+const ProductCard = ({ image, name, price }) => {
   return (
-    <StyledProductCard>
+    <StyledProductCard image={image}>
       <div className='image-container'>
         <div className="image"></div>
       </div>
       <div className="card-content">
         <p className="card-title">
-          titletitletitletitletitletitletitletitletitletitletitletitle
+          {name}
         </p>
         <div className="card-price">
-          $<span className="price">123</span>
+          $<span className="price">{price}</span>
         </div>
       </div>
     </StyledProductCard>
@@ -45,7 +45,7 @@ const StyledProductCard = styled.a`
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png');
+    background-image: ${props => `url(${props.image})`};
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
