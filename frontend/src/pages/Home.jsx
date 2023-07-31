@@ -1,23 +1,30 @@
+import styled from 'styled-components'
 import { Layout, Dropdown, Space, Row, Col, Image  } from 'antd';
 import { ProductCard, Footer } from '../components'
 import { DownOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../store/actions'
 
 
-const items = [
-  {
-    key: '1',
-    label: (<Link to="/login">个人主页</Link>),
-  },
-  {
-    key: '2',
-    label: (<Link to="/login">退出登录</Link>),
 
-  }
-];
 
 const Home = () => {
+  
+  const dispatch = useDispatch()
+  const handleLogout = async () => {
+    dispatch(logout())
+  }
+  const items = [
+    {
+      key: '1',
+      label: (<Link to="/login">个人主页</Link>),
+    },
+    {
+      key: '2',
+      label: (<Link onClick={handleLogout}>退出登录</Link>),
+    }
+  ];
   return (
     <Layout>
       <StyledHeader>
