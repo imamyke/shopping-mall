@@ -13,7 +13,8 @@ import {
 } from "./orderAction"
 
 import {
-  listUser
+  listUser,
+  deleteUser
 } from "./adminActions"
 
 export { 
@@ -31,5 +32,6 @@ export {
   createOrderAction,
   getOrderDetailAction,
   myOrderListAction,
-  listUser
+  listUser,
+  deleteUser
 }

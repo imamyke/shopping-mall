@@ -80,11 +80,11 @@ const Login = () => {
           <div className="navbar">
             <div className='navbar-logo'>
               <img src={Logo} width={160} alt="logo"  />
-              <h1 className='title'>欢迎注册</h1>
+              <h1 className='title'>欢迎登录</h1>
             </div>
             <p className='login-link'>
-              已有帳號?
-              <Link to='/login' className='login'>请登录 {`>`}</Link>
+            还没有帳號?
+              <Link to='/signup' className='login'>请注册 {`>`}</Link>
             </p>
           </div>
         </StyledContainer>
@@ -119,7 +119,7 @@ const Login = () => {
               <button 
                 type="submit" 
                 className="login-button" 
-              >一键快速注册</button>
+              >一键快速登录</button>
             </div>
             <div className='error'>
               { error && <Alert message={error} type="warning" /> }

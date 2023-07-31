@@ -40,7 +40,7 @@ const Home = () => {
           <Row justify="end" style={{ textAlign: 'center'}}>
           { userInfo && userInfo.isAdmin && (
               <Col span={2} key="6">
-                <Link to='/'>
+                <Link to='/admin/userlist'>
                   後台管理
                 </Link>
               </Col>
