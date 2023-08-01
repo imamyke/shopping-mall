@@ -26,7 +26,8 @@ import {
   userDeleteReducer,
   userEditReducer,
   userAdminProfileReducer,
-  productDeleteReducer
+  productDeleteReducer,
+  productCreateReducer
 } from "./adminReducer"
 
 export { 
@@ -45,5 +46,6 @@ export {
   userDeleteReducer,
   userEditReducer,
   userAdminProfileReducer,
-  productDeleteReducer
+  productDeleteReducer,
+  productCreateReducer
 }

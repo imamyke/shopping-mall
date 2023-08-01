@@ -60,6 +60,65 @@ const adminController = {
       throw new Error('Product not found')
     }
   }),
+  createProduct: asyncHandler (async (req, res) => {
+    const product = new Product({
+      name: 'Sample name',
+      price: 0,
+      user: req.user._id,
+      image: '/images/sample.jpg',
+      category: '分类',
+      countInStock: 0,
+      numReviews: 0,
+      brand: '品牌',
+      typeNum: '型号',
+      scale: '规格',
+      color: '颜色样式',
+      style: '款式',
+      material: '材质'
+    })
+
+    const createdProduct = await product.save()
+    res.status(201).json(createdProduct)
+  }),
+  updateProduct: asyncHandler (async (req, res) => {
+    const {
+      name,
+      price,
+      user,
+      image,
+      category,
+      countInStock,
+      brand,
+      typeNum,
+      scale,
+      color,
+      style,
+      material
+    } = req.body
+    const product = await Product.findById(req.params.id)
+    
+    if (product) {
+      product.name = name
+      product.price = price
+      product.user = user
+      product.image = image
+      product.category = category
+      product.countInStock = countInStock
+      product.brand = brand
+      product.typeNum = typeNum
+      product.scale = scale
+      product.color = color
+      product.style = style
+      product.material = material
+
+      const updatedProduct = await product.save()
+      res.status(201).json(updatedProduct)
+    } else {
+      res.status(404)
+      throw new Error('Product not found')
+    }
+
+  }),
 }
 
 module.exports = adminController

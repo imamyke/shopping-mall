@@ -18,7 +18,8 @@ import {
   userDeleteReducer,
   userEditReducer,
   userAdminProfileReducer,
-  productDeleteReducer
+  productDeleteReducer,
+  productCreateReducer
 } from './reducers'
 
 // initialState
@@ -53,7 +54,8 @@ const reducer = combineReducers({
   userDelete: userDeleteReducer,
   userEdit: userEditReducer,
   userProfile: userAdminProfileReducer,
-  productDelete: productDeleteReducer
+  productDelete: productDeleteReducer,
+  productCreate: productCreateReducer
 })
 
 // enhancer

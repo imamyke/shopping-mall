@@ -12,8 +12,6 @@ const UserList = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  
   const userList = useSelector((state) => state.userList)
   const { loading, error, users } = userList
   const userLogin = useSelector((state) => state.userLogin)
@@ -68,7 +66,7 @@ const UserList = () => {
       render: (text, record) => (
       <>
         <button onClick={() => handleDelete(record.userID)}>删除</button> 
-        <button onClick={() => navigate(`/admin/useredit/${record.userID}`)}>修改</button> 
+        <button onClick={() => navigate(`/admin/users/${record.userID}/edit`)}>修改</button> 
       </>)
     }
   ];

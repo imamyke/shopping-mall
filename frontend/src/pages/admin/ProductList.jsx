@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { productListAction, deleteProduct } from '../../store/actions'
+import { productListAction, deleteProduct, createProduct } from '../../store/actions'
 import { PlusOutlined } from '@ant-design/icons';
 import { Table } from 'antd';
 import { Loader, BackgroundDefault } from '../../components'
@@ -18,20 +18,34 @@ const ProductList = () => {
   const { userInfo } = userLogin
   const productDelete = useSelector((state) => state.productDelete)
   const { loading : loadingDelete, success, error: errorDelete } = productDelete;
+  const productCreate = useSelector((state) => state.productCreate)
+  const { 
+    loading : loadingCreate, 
+    success: successCreate, 
+    error: errorCreate,
+    product: productCreated
+  } = productCreate;
+  
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure")) {
       dispatch(deleteProduct(id));
     }
   }
+  const handleCreate = () => {
+    dispatch(createProduct())
+  }
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin)  {
-      dispatch(productListAction())
-    } else {
+    if (!userInfo && !userInfo.isAdmin)  {
       navigate('/login')
+    } 
+    if (successCreate) {
+      navigate(`/admin/products/${productCreated._id}/edit`)
+    } else {
+      dispatch(productListAction())
     }
-  }, [dispatch, navigate, userInfo, success])
+  }, [dispatch, navigate, userInfo, successCreate, productCreated])
 
   const columns = [
     {
@@ -60,9 +74,29 @@ const ProductList = () => {
       key: 'price'
     },
     {
-      title: '评价',
-      dataIndex: 'rating',
-      key: 'rating'
+      title: '型号',
+      dataIndex: 'typeNum',
+      key: 'typeNum'
+    },
+    {
+      title: '规格',
+      dataIndex: 'scale',
+      key: 'scale'
+    },
+    {
+      title: '颜色样式',
+      dataIndex: 'color',
+      key: 'color'
+    },
+    {
+      title: '款式',
+      dataIndex: 'style',
+      key: 'style'
+    },
+    {
+      title: '材质',
+      dataIndex: 'material',
+      key: 'material'
     },
     {
       title: '操作',
@@ -71,7 +105,7 @@ const ProductList = () => {
       render: (text, record) => (
       <>
         <button onClick={() => handleDelete(record.productID)}>删除</button> 
-        <button onClick={() => navigate(`/admin/productedit/${record.productID}`)}>修改</button> 
+        <button onClick={() => navigate(`/admin/products/${record.productID}/edit`)}>修改</button> 
       </>)
     }
   ];
@@ -84,12 +118,18 @@ const ProductList = () => {
       brand: product.brand,
       category: product.category,
       price: product.price,
-      rating: product.rating,
+      typeNum: product.typeNum,
+      scale: product.scale || '無',
+      color: product.color || '無',
+      style: product.style || '無',
+      material: product.material || '無',
+      rating: product.rating || '無',
     }
   ))
   return (
-    <BackgroundDefault title="产品列表" buttonTitle="添加产品" onClick>
+    <BackgroundDefault title="产品列表" buttonTitle="添加产品" onClick={handleCreate}>
       { loadingDelete && <Loader /> }
+      { loadingCreate && <Loader /> }
       { loading ? <Loader /> : (
         <Table 
         columns={columns} 

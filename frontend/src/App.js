@@ -8,7 +8,8 @@ import {
   Profile,
   UserList,
   UserEdit,
-  ProductList
+  ProductList,
+  ProductEdit
 } from './pages'
 
 function App() {
@@ -22,8 +23,9 @@ function App() {
       <Route exact path='/cart/:id' element={<Cart />} />
       <Route exact path='/profile' element={<Profile />} />
       <Route exact path='/admin/userlist' element={<UserList />} />
-      <Route exact path='/admin/useredit/:id' element={<UserEdit />} />
+      <Route exact path='/admin/users/:id/edit' element={<UserEdit />} />
       <Route exact path='/admin/productlist' element={<ProductList />} />
+      <Route exact path='/admin/products/:id/edit' element={<ProductEdit />} />
     </Routes>
   );
 }

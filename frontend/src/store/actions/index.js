@@ -17,7 +17,8 @@ import {
   deleteUser,
   editUser,
   getUser,
-  deleteProduct
+  deleteProduct,
+  createProduct
 } from "./adminActions"
 
 export { 
@@ -39,5 +40,6 @@ export {
   deleteUser,
   editUser,
   getUser,
-  deleteProduct
+  deleteProduct,
+  createProduct
 }

@@ -9,6 +9,7 @@ import Profile from './Profile'
 import UserList from './admin/UserList'
 import UserEdit from './admin/UserEdit'
 import ProductList from './admin/ProductList'
+import ProductEdit from './admin/ProducEdit'
 
 export { 
   Home, 
@@ -19,5 +20,6 @@ export {
   Profile,
   UserList,
   UserEdit,
-  ProductList
+  ProductList,
+  ProductEdit
 }
