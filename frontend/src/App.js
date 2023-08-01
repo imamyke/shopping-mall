@@ -7,7 +7,8 @@ import {
   ProductDetail, 
   Profile,
   UserList,
-  UserEdit
+  UserEdit,
+  ProductList
 } from './pages'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Route exact path='/profile' element={<Profile />} />
       <Route exact path='/admin/userlist' element={<UserList />} />
       <Route exact path='/admin/useredit/:id' element={<UserEdit />} />
+      <Route exact path='/admin/productlist' element={<ProductList />} />
     </Routes>
   );
 }

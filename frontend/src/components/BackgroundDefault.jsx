@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { useNavigate,Link } from 'react-router-dom'
-import { FileSearchOutlined, UserOutlined, ClusterOutlined} from '@ant-design/icons';
+import { useNavigate, Link, useParams } from 'react-router-dom'
+import { FileSearchOutlined, UserOutlined, ClusterOutlined, PlusOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 
-const BackgroundDefault = ({ children, title }) => {
+const BackgroundDefault = ({ children, title, buttonTitle, onClick }) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -52,12 +52,17 @@ const BackgroundDefault = ({ children, title }) => {
         />
       </Sider>
         <Layout>
-          <Content style={{ margin: '90px 16px 0' }}>
-            <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
-            <h1 style={{ marginBottom: 20, fontSize: 24, fontWeight: 'bold' }}>{title}</h1>
-            { children }
-            </div>
-          </Content>
+          <StyledContent>
+            <Content style={{ margin: '90px 16px 0' }}>
+              <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
+                <div className='title-container'>
+                  <h1>{title}</h1>
+                  { onClick && <button onClick={() => onClick()}><PlusOutlined />{buttonTitle}</button>}
+                </div>
+              { children }
+              </div>
+            </Content>
+          </StyledContent>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
         </Layout>
     </Layout>
@@ -65,6 +70,28 @@ const BackgroundDefault = ({ children, title }) => {
 }
 
 export default BackgroundDefault
+
+const StyledContent = styled.div`
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-weight: bold;
+    h1 {
+      font-size: 24px; 
+    }
+    button {
+      display: block;
+      border: 0;
+      border-radius: 4px;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px 6px;
+      background: #032748;
+      color: #fff;
+    }
+  }
+`
 
 const StyledHeader = styled.div`
   .header {

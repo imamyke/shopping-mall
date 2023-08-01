@@ -1,18 +1,14 @@
 import styled from 'styled-components'
 import { useEffect, useState, useRef } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { editUser, getUser } from '../../store/actions'
 import { Loader, BackgroundDefault } from '../../components'
 
 const UserEdit = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const { id } = useParams()
   const inputRef = useRef(null)
-  
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
 
   // 跟後端拿 user 的資料: GET /api/admin/users/:id
   const userProfile = useSelector((state) => state.userProfile)
@@ -23,7 +19,6 @@ const UserEdit = () => {
   // 更新 user 的資料: PUT /api/admin/users/:id
   const userEdit = useSelector((state) => state.userEdit)
   const { loading: loadingEdit, success: successEdit } = userEdit
-
 
   const [name, setName] = useState(user.name)
   const [accountName, setAccountName] = useState(user.accountName)

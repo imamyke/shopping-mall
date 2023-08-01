@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Product = require('../models/product')
 const asyncHandler = require('express-async-handler')
 const generateToken = require('../utils/generateToken')
 
@@ -47,6 +48,16 @@ const adminController = {
     } else {
       res.status(404)
       throw new Error('User not found')
+    }
+  }),
+  deleteProduct: asyncHandler (async (req, res) => {
+    const product = await Product.findById(req.params.id)
+    if (product) {
+      product.deleteOne()
+      res.json({ message: 'Product removed' })
+    } else {
+      res.status(404)
+      throw new Error('Product not found')
     }
   }),
 }

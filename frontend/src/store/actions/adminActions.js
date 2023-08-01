@@ -11,7 +11,11 @@ import {
   USER_EDIT_FAIL,
   USER_ADMIN_PROFILE_REQUEST,
   USER_ADMIN_PROFILE_SUCCESS,
-  USER_ADMIN_PROFILE_FAIL
+  USER_ADMIN_PROFILE_FAIL,
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_SUCCESS,
+  PRODUCT_DELETE_FAIL,
+  PRODUCT_DELETE_RESET
 } from '../types/adminConstants'
 import {
   USER_DETAIL_SUCCESS
@@ -128,6 +132,34 @@ export const editUser = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({ 
       type: USER_EDIT_FAIL, 
+      payload: 
+        error.response && error.response.data.message 
+          ? error.response.data.message 
+          : error.response
+    })
+  }
+}
+
+export const deleteProduct = (id) => async (dispatch, getState) => {
+  try {
+    // 從 store 取出 user 的 token
+    dispatch({ type: PRODUCT_DELETE_REQUEST })
+    const { userLogin: { userInfo } } = getState()
+    
+    // 向 後端請求 user 的 data
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+    // await axios.delete(`/api/admin/users/${id}`, config)
+    await axios.delete(`/api/admin/products/${id}`, config)
+
+    // 提交給前端取用 data
+    dispatch({ type: PRODUCT_DELETE_SUCCESS })
+  } catch (error) {
+    dispatch({ 
+      type: PRODUCT_DELETE_FAIL, 
       payload: 
         error.response && error.response.data.message 
           ? error.response.data.message 

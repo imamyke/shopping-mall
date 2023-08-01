@@ -8,6 +8,7 @@ import Profile from './Profile'
 // admin pages
 import UserList from './admin/UserList'
 import UserEdit from './admin/UserEdit'
+import ProductList from './admin/ProductList'
 
 export { 
   Home, 
@@ -17,5 +18,6 @@ export {
   ProductDetail, 
   Profile,
   UserList,
-  UserEdit
+  UserEdit,
+  ProductList
 }
