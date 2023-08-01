@@ -6,6 +6,13 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
+  USER_EDIT_REQUEST,
+  USER_EDIT_SUCCESS,
+  USER_EDIT_FAIL,
+  USER_EDIT_RESET,
+  USER_ADMIN_PROFILE_REQUEST,
+  USER_ADMIN_PROFILE_SUCCESS,
+  USER_ADMIN_PROFILE_FAIL,
 } from '../types/adminConstants'
 
 export const userListReducer = (
@@ -35,6 +42,39 @@ export const userDeleteReducer = (
     case USER_DELETE_SUCCESS:
       return { loading: false, success: true }
     case USER_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userEditReducer = (
+  state = { user: {} }, 
+  action
+  ) => {
+  switch (action.type) {
+    case USER_EDIT_REQUEST:
+      return { loading: true }
+    case USER_EDIT_SUCCESS:
+      return { loading: false, success: true }
+    case USER_EDIT_FAIL:
+      return { loading: false, error: action.payload }
+    case USER_EDIT_RESET:
+      return { user: {} }
+    default:
+      return state
+  }
+}
+export const userAdminProfileReducer = (
+  state = { user: {} }, 
+  action
+  ) => {
+  switch (action.type) {
+    case USER_ADMIN_PROFILE_REQUEST:
+      return { ...state, loading: true }
+    case USER_ADMIN_PROFILE_SUCCESS:
+      return { loading: false , user: action.payload }
+    case USER_ADMIN_PROFILE_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

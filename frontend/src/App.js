@@ -6,7 +6,8 @@ import {
   Cart, 
   ProductDetail, 
   Profile,
-  UserList
+  UserList,
+  UserEdit
 } from './pages'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route exact path='/cart/:id' element={<Cart />} />
       <Route exact path='/profile' element={<Profile />} />
       <Route exact path='/admin/userlist' element={<UserList />} />
+      <Route exact path='/admin/useredit/:id' element={<UserEdit />} />
     </Routes>
   );
 }

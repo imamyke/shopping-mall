@@ -14,7 +14,9 @@ import {
 
 import {
   listUser,
-  deleteUser
+  deleteUser,
+  editUser,
+  getUser
 } from "./adminActions"
 
 export { 
@@ -33,5 +35,7 @@ export {
   getOrderDetailAction,
   myOrderListAction,
   listUser,
-  deleteUser
+  deleteUser,
+  editUser,
+  getUser
 }

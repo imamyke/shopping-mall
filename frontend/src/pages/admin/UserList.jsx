@@ -1,17 +1,13 @@
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
-import { useNavigate,Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listUser, deleteUser } from '../../store/actions'
-import { FileSearchOutlined, UserOutlined, ClusterOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { Layout, Menu, theme, Table } from 'antd';
-import { Loader } from '../../components'
-const { Header, Content, Footer, Sider } = Layout;
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { Table } from 'antd';
+import { Loader, BackgroundDefault } from '../../components'
 
 const UserList = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -31,7 +27,6 @@ const UserList = () => {
     }
   }
 
-
   useEffect(() => {
     if (userInfo && userInfo.isAdmin)  {
       dispatch(listUser())
@@ -40,26 +35,6 @@ const UserList = () => {
     }
   }, [dispatch, navigate, userInfo, success])
 
-  const menuItems = [
-    {
-      key: '/admin/userlist',
-      icon: <UserOutlined />,
-      label: '用戶管理',
-      onClick: (item) => navigate(item.key)
-    },
-    {
-      key: '/admin/productlist',
-      icon: <ClusterOutlined />,
-      label: '产品管理',
-      onClick: (item) => navigate(item.key)
-    },
-    {
-      key: '/admin/orderlist',
-      icon: <FileSearchOutlined />,
-      label: '订单管理',
-      onClick: (item) => navigate(item.key)
-    },
-  ]
   const columns = [
     {
       title: '用户ID',
@@ -82,7 +57,7 @@ const UserList = () => {
       key: 'phone'
     },
     {
-      title: '管理員權限',
+      title: '管理员权限',
       dataIndex: 'admin',
       key: 'admin'
     },
@@ -90,8 +65,11 @@ const UserList = () => {
       title: '操作',
       dataIndex: 'action',
       key: 'action',
-      render: (text, record) => (<>
-        <button onClick={() => handleDelete(record.userID)}>刪除</button> <button>編輯</button> </>)
+      render: (text, record) => (
+      <>
+        <button onClick={() => handleDelete(record.userID)}>删除</button> 
+        <button onClick={() => navigate(`/admin/useredit/${record.userID}`)}>修改</button> 
+      </>)
     }
   ];
   
@@ -149,63 +127,22 @@ const UserList = () => {
   };
 
   return (
-    <Layout hasSider>
-      <StyledHeader>
-        <Header className='header' style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <h1 style={{ color: '#fff', fontSize: '30px' }}>商城後台管理</h1>
-          <Link to="/" style={{ color: '#fff' }}>回到前台</Link>
-        </Header>
-      </StyledHeader>
-      <Sider
-        style={{ marginTop: '70px', height: '100vh' }}
-        className='sider'
-        breakpoint="lg"
-        collapsedWidth="0"
-      >
-        <Menu
-          theme="dark"
-          mode="inline"
-          items={menuItems}
-        />
-      </Sider>
-      { loading ? <Loader /> : (
-        <Layout>
-          <Content style={{ margin: '90px 16px 0' }}>
-            <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
-            <h1 style={{ marginBottom: 20, fontSize: 24, fontWeight: 'bold' }}>用戶列表</h1>
-            <Table 
-              rowSelection={rowSelection} 
-              columns={columns} 
-              dataSource={data} 
-              onRow={(e) => {
-                return {
-                  onClick: (e) => { console.log(e.target) }
-                }
-              }}
-            />
-            </div>
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
-        </Layout>
-      ) }
-    </Layout>
+    <BackgroundDefault title="用戶列表">
+      {loading ? <Loader /> : (
+        <Table 
+        rowSelection={rowSelection} 
+        columns={columns} 
+        dataSource={data} 
+        onRow={(e) => {
+          return {
+            onClick: (e) => { console.log(e.target) }
+          }
+        }}
+      />
+      )}
+    </BackgroundDefault>
+    
   )
 }
 
 export default UserList
-
-const StyledHeader = styled.div`
-  .header {
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0; 
-    width: 100%;
-    z-index: 1000;
-  }
-  .ant-layout-header {
-    height: 70px;
-  }
-
-`
