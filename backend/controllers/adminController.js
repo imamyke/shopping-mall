@@ -84,7 +84,6 @@ const adminController = {
     const {
       name,
       price,
-      user,
       image,
       category,
       countInStock,
@@ -100,7 +99,6 @@ const adminController = {
     if (product) {
       product.name = name
       product.price = price
-      product.user = user
       product.image = image
       product.category = category
       product.countInStock = countInStock
@@ -118,6 +116,16 @@ const adminController = {
       throw new Error('Product not found')
     }
 
+  }),
+  getProductById: asyncHandler (async (req, res) => {
+    const product = await Product.findById(req.params.id)
+    if (product) {
+      res.json(product)
+    } else {
+      res.status(404)
+      throw new Error('Product not found')
+    }
+    res.json(product)
   }),
 }
 

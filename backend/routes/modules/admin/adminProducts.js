@@ -6,5 +6,6 @@ const { authMiddleware, admin } = require('../../../middlewares/authMiddleware')
 router.post('/', authMiddleware, admin, adminController.createProduct)
 router.put('/:id', authMiddleware, admin, adminController.updateProduct)
 router.delete('/:id', authMiddleware, admin, adminController.deleteProduct)
+router.get('/:id', authMiddleware, admin, adminController.getProductById)
 
 module.exports = router

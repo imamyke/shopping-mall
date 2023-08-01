@@ -14,10 +14,13 @@ const ProductList = () => {
   
   const products = useSelector((state) => state.productList)
   const { loading, error, productList } = products
+  
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+  
   const productDelete = useSelector((state) => state.productDelete)
-  const { loading : loadingDelete, success, error: errorDelete } = productDelete;
+  const { loading : loadingDelete, success: successDelete, error: errorDelete } = productDelete;
+  
   const productCreate = useSelector((state) => state.productCreate)
   const { 
     loading : loadingCreate, 
@@ -25,7 +28,6 @@ const ProductList = () => {
     error: errorCreate,
     product: productCreated
   } = productCreate;
-  
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure")) {
@@ -45,7 +47,7 @@ const ProductList = () => {
     } else {
       dispatch(productListAction())
     }
-  }, [dispatch, navigate, userInfo, successCreate, productCreated])
+  }, [dispatch, navigate, userInfo, successCreate, productCreated, successDelete])
 
   const columns = [
     {
@@ -72,6 +74,11 @@ const ProductList = () => {
       title: '价格',
       dataIndex: 'price',
       key: 'price'
+    },
+    {
+      title: '库存量',
+      dataIndex: 'countInStock',
+      key: 'countInStock'
     },
     {
       title: '型号',
@@ -118,6 +125,7 @@ const ProductList = () => {
       brand: product.brand,
       category: product.category,
       price: product.price,
+      countInStock: product.countInStock,
       typeNum: product.typeNum,
       scale: product.scale || '無',
       color: product.color || '無',

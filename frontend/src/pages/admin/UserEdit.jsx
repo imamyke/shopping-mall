@@ -24,7 +24,7 @@ const UserEdit = () => {
   const [accountName, setAccountName] = useState(user.accountName)
   const [phone, setPhone] = useState(user.phone)
   const [isAdmin, setIsAdmin] = useState(user.isAdmin)
-  
+
   useEffect(() => {
     if (!user.name || user._id !== id) {
       dispatch(getUser(id))

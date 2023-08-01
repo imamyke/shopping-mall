@@ -1,154 +1,186 @@
 import styled from 'styled-components'
 import { useEffect, useState, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { editUser, getUser } from '../../store/actions'
+import { updateProduct, getProduct } from '../../store/actions'
 import { Loader, BackgroundDefault } from '../../components'
+import { PRODUCT_UPDATE_RESET } from '../../store/types/adminConstants'
 
 const ProductEdit = () => {
-  const dispatch = useDispatch()
   const { id } = useParams()
-  const inputRef = useRef(null)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  // 跟後端拿 user 的資料: GET /api/admin/users/:id
-  const userProfile = useSelector((state) => state.userProfile)
-  const { loading: loadingProfile } = userProfile
-  // 從 store 取得 user 的 Data
-  const userDetail = useSelector((state) => state.userDetail)
-  const { user } = userDetail
-  // 更新 user 的資料: PUT /api/admin/users/:id
-  const userEdit = useSelector((state) => state.userEdit)
-  const { loading: loadingEdit, success: successEdit } = userEdit
+  const productAdminDetail = useSelector((state) => state.productAdminDetail)
+  const { loading, product, error } = productAdminDetail
 
-  const [name, setName] = useState(user.name)
-  const [brand, setBrand] = useState(user.brand)
-  const [category, setCategory] = useState(user.category)
-  const [price, setPrice] = useState(user.price)
-  const [typeNum, setTypeNum] = useState(user.typeNum)
-  const [scale, setScale] = useState(user.scale)
-  const [color, setColor] = useState(user.color)
-  const [style, setStyle] = useState(user.style)
-  const [material, setMaterial] = useState(user.material)
+  const productUpdate = useSelector((state) => state.productUpdate)
+  const { loading: loadingUpdate, success: successUpdate } = productUpdate
+
+  const [name, setName] = useState(product.name)
+  const [price, setPrice] = useState(product.price)
+  const [image, setImage] = useState(product.image)
+  const [brand, setBrand] = useState(product.brand)
+  const [category, setCategory] = useState(product.category)
+  const [countInStock, setCountInStock] = useState(product.countInStock)
+  const [typeNum, setTypeNum] = useState(product.typeNum)
+  const [scale, setScale] = useState(product.scale)
+  const [color, setColor] = useState(product.color)
+  const [style, setStyle] = useState(product.style)
+  const [material, setMaterial] = useState(product.material)
   
   useEffect(() => {
-    if (!user.name || user._id !== id) {
-      dispatch(getUser(id))
+    if (successUpdate) {
+      dispatch({ type:  PRODUCT_UPDATE_RESET })
+      navigate('/admin/productlist')
+    } 
+    if (!product.name || product._id !== id) {
+      dispatch(getProduct(id))
     } else {
-      setName(user.name)
-      setBrand(user.brand)
-      setCategory(user.category)
-      setPrice(user.price)
-      setTypeNum(user.typeNum)
-      setScale(user.scale)
-      setColor(user.color)
-      setStyle(user.style)
-      setMaterial(user.material)
+      setName(product.name)
+      setPrice(product.price)
+      setImage(product.image)
+      setBrand(product.brand)
+      setCategory(product.category)
+      setCountInStock(product.countInStock)
+      setTypeNum(product.typeNum)
+      setScale(product.scale)
+      setColor(product.color) 
+      setStyle(product.style)
+      setMaterial(product.material)
     }
-  }, [dispatch, id, user, successEdit])
-
+    
+  }, [dispatch, id, product, successUpdate, navigate])
+  
+  console.log(product);
+  
+  
   const handleSubmit = (e) => {
     e.preventDefault()
-    // dispatch(editUser({ _id: id, name, accountName, phone, isAdmin }))
+    dispatch(
+      updateProduct({ 
+        _id: product._id,
+        name, 
+        price,
+        image,
+        category, 
+        countInStock,
+        brand, 
+        typeNum,
+        scale,
+        color,
+        style,
+        material
+      })
+    )
   }
 
   return (
     <BackgroundDefault title="编辑产品信息">
-      { loadingProfile && <Loader /> } 
-      { loadingEdit ? <Loader /> : (
+      { loading ? <Loader /> : (
         <StyledForm onSubmit={handleSubmit}>
           <div className='form-item'>
-            <label htmlFor="name">产品名称</label>
+            <label htmlFor="name">商品名称</label>
             <input
-              ref={inputRef}  
+              value={name}              
               id='name' 
               type="text" 
-              defaultValue={name} 
               onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className='form-item'>
             <label htmlFor="brand">品牌</label>
-            <input 
-              ref={inputRef}
+            <input
+              value={brand}
               id='brand' 
               type="text" 
-              defaultValue={brand} 
               onChange={(e) => setBrand(e.target.value)}
             />
           </div>
           <div className='form-item'>
             <label htmlFor="category">分类</label>
-            <input 
-              ref={inputRef}
+            <input
+              value={category}
               id='category'
               type="text" 
-              defaultValue={category} 
               onChange={(e) => setCategory(e.target.value)}
             />
           </div>
           <div className='form-item'>
             <label htmlFor="price">价格</label>
-            <input 
-              ref={inputRef}
+            <input
+              value={price}
               id='price'
               type="text" 
-              defaultValue={price} 
               onChange={(e) => setPrice(e.target.value)}
             />
           </div>
           <div className='form-item'>
+            <label htmlFor="countInStock">库存量</label>
+            <input
+              value={countInStock}
+              id='countInStock'
+              type="text" 
+              onChange={(e) => setCountInStock(e.target.value)}
+            />
+          </div>
+          <div className='form-item'>
             <label htmlFor="typeNum">型号</label>
-            <input 
-              ref={inputRef}
+            <input
+              value={typeNum}
               id='typeNum'
               type="text" 
-              defaultValue={typeNum} 
               onChange={(e) => setTypeNum(e.target.value)}
             />
           </div>
           <div className='form-item'>
             <label htmlFor="scale">规格</label>
-            <input 
-              ref={inputRef}
+            <input
+              value={scale}
               id='scale'
               type="text" 
-              defaultValue={scale} 
               onChange={(e) => setScale(e.target.value)}
             />
           </div>
           <div className='form-item'>
             <label htmlFor="color">颜色样式</label>
-            <input 
-              ref={inputRef}
+            <input
+              value={color}
               id='color'
               type="text" 
-              defaultValue={color} 
               onChange={(e) => setColor(e.target.value)}
             />
           </div>
           <div className='form-item'>
             <label htmlFor="style">款式</label>
-            <input 
-              ref={inputRef}
+            <input
+              value={style}
               id='style'
               type="text" 
-              defaultValue={style} 
               onChange={(e) => setStyle(e.target.value)}
             />
           </div>
           <div className='form-item'>
             <label htmlFor="material">材质</label>
-            <input 
-              ref={inputRef}
+            <input
+              value={material}
               id='material'
               type="text" 
-              defaultValue={material} 
               onChange={(e) => setMaterial(e.target.value)}
+            />
+          </div>
+          <div className='form-item'>
+            <label htmlFor="image">商品图片</label>
+            <input
+              value={image}
+              id='image'
+              type="text" 
+              onChange={(e) => setImage(e.target.value)}
             />
           </div>
           <button type='submit'>确认</button>
         </StyledForm>
-      ) }
+      )}
     </BackgroundDefault>
   )
 }
@@ -156,7 +188,6 @@ const ProductEdit = () => {
 export default ProductEdit
 
 const StyledForm = styled.form`
-  height: 80vh;
   width: 500px;
   margin: 60px auto 0 auto;
   .form-item {

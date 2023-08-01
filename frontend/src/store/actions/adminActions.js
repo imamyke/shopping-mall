@@ -20,6 +20,14 @@ import {
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_CREATE_FAIL,
   PRODUCT_CREATE_RESET,
+  PRODUCT_UPDATE_REQUEST,
+  PRODUCT_UPDATE_SUCCESS,
+  PRODUCT_UPDATE_FAIL,
+  PRODUCT_UPDATE_RESET,
+  PRODUCT_ADMIN_DETAIL_REQUEST,
+  PRODUCT_ADMIN_DETAIL_SUCCESS,
+  PRODUCT_ADMIN_DETAIL_FAIL,
+  PRODUCT_ADMIN_DETAIL_RESET,
 } from '../types/adminConstants'
 import {
   USER_DETAIL_SUCCESS
@@ -156,7 +164,6 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`
       }
     }
-    // await axios.delete(`/api/admin/users/${id}`, config)
     await axios.delete(`/api/admin/products/${id}`, config)
 
     // 提交給前端取用 data
@@ -191,6 +198,66 @@ export const createProduct = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({ 
       type: PRODUCT_CREATE_FAIL, 
+      payload: 
+        error.response && error.response.data.message 
+          ? error.response.data.message 
+          : error.response
+    })
+  }
+}
+
+export const updateProduct = (product) => async (dispatch, getState) => {
+  try {
+    // 從 store 取出 user 的 token
+    dispatch({ type: PRODUCT_UPDATE_REQUEST })
+    const { userLogin: { userInfo } } = getState()
+    
+    // 向 後端請求 user 的 data
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+    // await axios.delete(`/api/admin/users/${id}`, config)
+    const { data } = await axios.put(`/api/admin/products/${product._id}`, product, config)
+
+    // 提交給前端取用 data
+    dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({ 
+      type: PRODUCT_UPDATE_FAIL, 
+      payload: 
+        error.response && error.response.data.message 
+          ? error.response.data.message 
+          : error.response
+    })
+  }
+}
+export const getProduct = (id) => async (dispatch, getState) => {
+  try {
+    // 從 store 取出 user 的 token
+    dispatch({ type: USER_ADMIN_PROFILE_REQUEST })
+    const { userLogin: { userInfo } } = getState()
+    
+    // 向 後端請求 user 的 data
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+    const { data } = await axios.get(
+      `/api/admin/products/${id}`, config)
+
+    // 提交給前端取用 data
+    dispatch({ 
+      type: PRODUCT_ADMIN_DETAIL_REQUEST, 
+      payload: data 
+    })
+    dispatch({ type: PRODUCT_ADMIN_DETAIL_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({ 
+      type: PRODUCT_ADMIN_DETAIL_FAIL, 
       payload: 
         error.response && error.response.data.message 
           ? error.response.data.message 

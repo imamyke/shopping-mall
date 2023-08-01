@@ -18,7 +18,9 @@ import {
   editUser,
   getUser,
   deleteProduct,
-  createProduct
+  createProduct,
+  updateProduct,
+  getProduct
 } from "./adminActions"
 
 export { 
@@ -41,5 +43,7 @@ export {
   editUser,
   getUser,
   deleteProduct,
-  createProduct
+  createProduct,
+  updateProduct,
+  getProduct
 }
