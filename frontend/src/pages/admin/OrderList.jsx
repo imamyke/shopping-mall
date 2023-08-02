@@ -16,6 +16,7 @@ const OrderList = () => {
   const { loading, error, orders } = listOrder
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
   // const userDelete = useSelector((state) => state.userDelete)
   // const { success } = userDelete;
 
@@ -84,7 +85,7 @@ const OrderList = () => {
       userName: order.user && order.user.name,
       totalPrice: order.totalPrice,
       createdAt: order.createdAt.substring(0, 10),
-      isDelivered: order.isDelivered ? "完成" : "运送中",
+      isDelivered: order.isDelivered ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />,
       isPaid: order.isPaid ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />
     }
   ))

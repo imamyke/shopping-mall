@@ -34,7 +34,7 @@ const orderController = {
       throw new Error('Order not Found')
     }
   }),
-  updateOrderToPay: asyncHandler(async (req, res) => { // 待修改
+  updateOrderToPay: asyncHandler(async (req, res) => { // 沒有設線上支付，待修改
     const order = await Order.findById(req.params.id)
     const { id, status, update_time, email_address } = req.body
     if (order) {

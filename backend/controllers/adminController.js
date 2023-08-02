@@ -132,7 +132,32 @@ const adminController = {
     const orders = await Order.find({}).populate('user', 'id name')
     res.json(orders)
   }),
-  
+  updateOrderToPaid: asyncHandler(async (req, res) => { 
+    const order = await Order.findById(req.params.id)
+    if (order) {
+      order.isPaid = true
+      order.paidAt = Date.now()
+      const updateOrder = await order.save()
+
+      res.json(updateOrder)
+    } else {
+      res.status(404)
+      throw new Error('Order not Found')
+    }
+  }),
+  updateOrderToDelivered: asyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id)
+    if (order) {
+      order.isDelivered = true
+      order.deliveredAt = Date.now()
+      const updateOrder = await order.save()
+
+      res.json(updateOrder)
+    } else {
+      res.status(404)
+      throw new Error('Order not Found')
+    }
+  }),
 }
 
 module.exports = adminController

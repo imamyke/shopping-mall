@@ -16,7 +16,6 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_FAIL,
-  PRODUCT_DELETE_RESET,
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_CREATE_FAIL,
@@ -28,11 +27,18 @@ import {
   PRODUCT_ADMIN_DETAIL_REQUEST,
   PRODUCT_ADMIN_DETAIL_SUCCESS,
   PRODUCT_ADMIN_DETAIL_FAIL,
-  PRODUCT_ADMIN_DETAIL_RESET,
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDER_LIST_FAIL,
-  ORDER_LIST_RESET
+  ORDER_LIST_RESET,
+  ORDER_UPDATE_DELIVER_REQUEST,
+  ORDER_UPDATE_DELIVER_SUCCESS,
+  ORDER_UPDATE_DELIVER_FAIL,
+  ORDER_UPDATE_DELIVER_RESET,
+  ORDER_UPDATE_PAY_REQUEST,
+  ORDER_UPDATE_PAY_SUCCESS,
+  ORDER_UPDATE_PAY_FAIL,
+  ORDER_UPDATE_PAY_RESET,
 } from '../types/adminConstants'
 
 export const userListReducer = (
@@ -182,6 +188,42 @@ export const orderListReducer = (
       return { loading: false, error: action.payload }
     case ORDER_LIST_RESET:
       return { orders: [] }
+    default:
+      return state
+  }
+}
+
+export const orderAdminPayReducer = (
+  state = {}, 
+  action
+  ) => {
+  switch (action.type) {
+    case ORDER_UPDATE_PAY_REQUEST:
+      return { loading: true }
+    case ORDER_UPDATE_PAY_SUCCESS:
+      return { loading: false, success: true }
+    case ORDER_UPDATE_PAY_FAIL:
+      return { loading: false, error: action.payload }
+    case ORDER_UPDATE_PAY_RESET:
+      return {}
+    default:
+      return state
+  }
+}
+
+export const orderAdminDeliverReducer = (
+  state = {}, 
+  action
+  ) => {
+  switch (action.type) {
+    case ORDER_UPDATE_DELIVER_REQUEST:
+      return { loading: true }
+    case ORDER_UPDATE_DELIVER_SUCCESS:
+      return { loading: false, success: true }
+    case ORDER_UPDATE_DELIVER_FAIL:
+      return { loading: false, error: action.payload }
+    case ORDER_UPDATE_DELIVER_RESET:
+      return {}
     default:
       return state
   }

@@ -30,7 +30,9 @@ import {
   productCreateReducer,
   productUpdateReducer,
   productAdminDetailReducer,
-  orderListReducer
+  orderListReducer,
+  orderAdminPayReducer,
+  orderAdminDeliverReducer
 } from "./adminReducer"
 
 export { 
@@ -53,5 +55,7 @@ export {
   productCreateReducer,
   productUpdateReducer,
   productAdminDetailReducer,
-  orderListReducer
+  orderListReducer,
+  orderAdminPayReducer,
+  orderAdminDeliverReducer
 }

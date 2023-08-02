@@ -2,7 +2,6 @@ import { OrderTemplate } from "../components"
 import styled from 'styled-components'
 import clsx from 'clsx'
 import { message, Alert } from 'antd'
-import { DefaultNavbar } from '../components'
 import { useState, useEffect, useRef } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
