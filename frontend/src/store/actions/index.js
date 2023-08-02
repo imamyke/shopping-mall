@@ -1,5 +1,5 @@
 import { login, logout, signup, getUserDetail, updateUserProfile } from "./userAction";
-import { productListAction, productDetailAction } from "./productAction"
+import { productListAction, productDetailAction, createProductReview } from "./productAction"
 import { 
   addToCartAction, 
   removeFromCartAction,
@@ -51,5 +51,6 @@ export {
   getProduct,
   orderList,
   orderUpdatePaid,
-  orderUpdateDelivered
+  orderUpdateDelivered,
+  createProductReview
 }

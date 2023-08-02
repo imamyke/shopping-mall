@@ -18,7 +18,7 @@ const Home = () => {
     <DefaultTemplate>
       { loading && <Loader /> }
       <Row gutter={12} justify="start">
-        {productList.map(product => (
+        {productList?.map(product => (
           <Col span={4} key={product._id} style={{ marginBottom: '10px' }}>
             <ProductCard 
               url={`/product/${product._id}`}

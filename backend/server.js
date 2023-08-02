@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const routers = require('./routes')
+const morgan = require('morgan')
 const path = require('path')
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware')
 if (process.env.NODE_ENV !== 'production') {
@@ -10,6 +11,10 @@ if (process.env.NODE_ENV !== 'production') {
 const PORT = process.env.PORT || 6000
 
 require('./config/db')
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

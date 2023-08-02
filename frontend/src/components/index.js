@@ -5,6 +5,7 @@ import BackgroundDefault from './BackgroundDefault'
 import DefaultTemplate from './DefaultTemplate'
 import CartTemplate from './CartTemplate'
 import OrderTemplate from './OrderTemplate'
+import Meta from './Meta' 
 
 export { 
   ProductCard, 
@@ -13,5 +14,6 @@ export {
   BackgroundDefault, 
   DefaultTemplate,
   CartTemplate,
-  OrderTemplate 
+  OrderTemplate,
+  Meta 
 }
