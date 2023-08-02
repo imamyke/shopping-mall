@@ -44,8 +44,8 @@ const DefaultTemplate = ({ children }) => {
               </Col>
             )}
             <Col span={2} key="2">
-              <Link to='/'>
-                <i className="fas fa-shopping-cart"></i>Cart
+              <Link to='/cart'>
+                <i className="fas fa-shopping-cart"></i>购物车
               </Link>
             </Col>
             <Col span={2} key="6">

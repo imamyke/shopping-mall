@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { useNavigate, useParams, Link } from 'react-router-dom'
+import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { productDetailAction, addToCartAction } from "../store/actions"
 import { useEffect, useState } from "react"
@@ -94,9 +95,9 @@ const ProductDetail = () => {
             </div>
             <div className="add-to-cart">
               <div className="stepper">
-                <div className="minus" onClick={handleReduceQuantity}>-</div>
+                <div className="minus" onClick={handleReduceQuantity}><MinusOutlined /></div>
                 <div className="quantity">{quantity}</div>
-                <div className="plus" onClick={handleAddQuantity}>+</div>
+                <div className="plus" onClick={handleAddQuantity}><PlusOutlined /></div>
               </div>
               <button onClick={() => handleAddToCart(id, quantity)}>加入购物车</button>
             </div>
@@ -141,13 +142,17 @@ const StyledCart = styled.div`
       .minus, .plus, .quantity {
         width: 40px;
         height: 40px;
-        border: 1px solid #aaa;
         line-height: 40px;
       }
       .minus, .plus {
+        border: 1px solid #aaa;
         cursor: pointer;
+        font-size: 14px;
       }
       .quantity {
+        border-style: solid;
+        border-color: #aaa;
+        border-width: 1px 0 1px 0;
         font-weight: bold;
       }
     }

@@ -1,12 +1,10 @@
 import styled from 'styled-components'
 import { DefaultTemplate } from "../components"
 import { CheckCircleOutlined } from '@ant-design/icons';
-import { useNavigate, useParams, Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from "react"
+import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const AddToCartSuccess = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
   const { id } = params
@@ -33,7 +31,7 @@ const AddToCartSuccess = () => {
           </div>
           <div className="product-button">
             <button className='secondary' onClick={() => navigate(`/product/${id}`)}>查看商品详情</button>
-            <button className='primary' onClick={() => navigate(`/cart`)}>去購物車結算 {'>'}</button>
+            <button className='primary' onClick={() => navigate(`/cart`)}>去购物车结算 {'>'}</button>
           </div>
         </div>
       </StyledCart>
