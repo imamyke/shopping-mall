@@ -40,24 +40,29 @@ const OrderList = () => {
       key: 'orderID'
     },
     {
-      title: '订单名称',
-      dataIndex: 'name',
-      key: 'name'
+      title: '用戶名稱',
+      dataIndex: 'userName',
+      key: 'userName'
     },
     {
-      title: '帐号名',
-      dataIndex: 'accountName',
-      key: 'accountName'
+      title: '订单金额',
+      dataIndex: 'totalPrice',
+      key: 'totalPrice'
     },
     {
-      title: '手机号',
-      dataIndex: 'phone',
-      key: 'phone'
+      title: '下单时间',
+      dataIndex: 'createdAt',
+      key: 'createdAt'
     },
     {
-      title: '管理员权限',
-      dataIndex: 'admin',
-      key: 'admin'
+      title: '运送状况',
+      dataIndex: 'isDelivered',
+      key: 'isDelivered'
+    },
+    {
+      title: '是否付款',
+      dataIndex: 'isPaid',
+      key: 'isPaid'
     },
     {
       title: '操作',
@@ -67,6 +72,7 @@ const OrderList = () => {
       <>
         <button onClick={() => handleDelete(record.orderID)}>删除</button> 
         <button onClick={() => navigate(`/admin/orders/${record.orderID}/edit`)}>修改</button> 
+        <button onClick={() => navigate(`/order/${record.orderID}`)}>訂單詳情</button> 
       </>)
     }
   ];
@@ -75,10 +81,11 @@ const OrderList = () => {
     {
       key: order._id,
       orderID: order._id,
-      name: order.name,
-      accountName: order.accountName,
-      phone: order.phone,
-      admin: order.isAdmin ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />
+      userName: order.user && order.user.name,
+      totalPrice: order.totalPrice,
+      createdAt: order.createdAt.substring(0, 10),
+      isDelivered: order.isDelivered ? "完成" : "运送中",
+      isPaid: order.isPaid ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />
     }
   ))
   
