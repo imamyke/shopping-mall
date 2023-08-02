@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { productDetailAction, addToCartAction } from "../store/actions"
 import { useEffect, useState } from "react"
 import { Loader, DefaultTemplate } from '../components'
-import { DownOutlined } from '@ant-design/icons'
-import { Row, Col, Rate, message } from 'antd';
-
+import { Row, Col, Rate } from 'antd';
 
 const ProductDetail = () => {
   const dispatch = useDispatch()
@@ -18,10 +16,6 @@ const ProductDetail = () => {
 
   const results = useSelector(state => state.productDetail)
   const { loading, product } = results
-
-  const cart = useSelector(state => state.cart)
-  const { cartItems } = cart
-  console.log(cartItems);
 
   // 導入產品資訊
   useEffect(() => {
