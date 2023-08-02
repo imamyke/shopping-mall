@@ -77,7 +77,9 @@ const Signup = () => {
         <StyledContainer>
           <div className="navbar">
             <div className='navbar-logo'>
-              <img src={Logo} width={160} alt="logo"  />
+              <Link to="/">
+                <img src={Logo} width={160} alt="logo"  />
+              </Link>
               <h1 className='title'>欢迎注册</h1>
             </div>
             <p className='login-link'>

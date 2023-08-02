@@ -13,6 +13,8 @@ import ProductEdit from './admin/ProducEdit'
 import OrderList from './admin/OrderList'
 import OrderEdit from './admin/OrderEdit'
 import AddToCartSuccess from './AddToCartSuccess'
+import FillOrder from './FillOrder'
+import Order from './Order'
 
 export { 
   Home, 
@@ -27,5 +29,7 @@ export {
   ProductEdit,
   OrderList,
   OrderEdit,
-  AddToCartSuccess
+  AddToCartSuccess,
+  FillOrder,
+  Order
 }

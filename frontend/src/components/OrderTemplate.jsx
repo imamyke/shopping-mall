@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Layout, Dropdown, Space, Row, Col, Image  } from 'antd';
-import { Footer } from '../components'
+import { Footer } from '.'
 import { productListAction } from "../store/actions"
 import { useEffect } from "react"
 
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../store/actions'
 
-const CartTemplate = ({ children }) => {
+const OrderTemplate = ({ children, title }) => {
   
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
@@ -44,7 +44,7 @@ const CartTemplate = ({ children }) => {
               </Col>
             )}
             <Col span={2} key="2">
-              <Link to='/cart'>
+              <Link to='/'>
                 <i className="fas fa-shopping-cart"></i>购物车
               </Link>
             </Col>
@@ -67,7 +67,7 @@ const CartTemplate = ({ children }) => {
         <StyledTopMenu>
           <StyledContainer>
             <Row justify="flex-start" align="middle">
-              <Col span={6}>
+              <Col span={6} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                 <Link to="/">
                   <Image 
                     preview={false}
@@ -75,17 +75,7 @@ const CartTemplate = ({ children }) => {
                     src='https://img10.360buyimg.com/img/jfs/t1/192028/25/33459/5661/63fc2af2F1f6ae1b6/d0e4fdc2f126cbf5.png'
                     />
                 </Link>
-              </Col>
-              <Col span={12} style={{ alignSelf: 'end', marginBottom: '14px' }}>
-                <StyledSearchContainer>
-                  <input 
-                    type="text"
-                    placeholder='请输入商品...'
-                  />
-                  <button type='button'>
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </button>
-                </StyledSearchContainer>
+                <h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>{title}</h1>
               </Col>
             </Row>
           </StyledContainer>
@@ -103,7 +93,7 @@ const CartTemplate = ({ children }) => {
   )
 }
 
-export default CartTemplate
+export default OrderTemplate
 
 const StyledContainer = styled.div`
   min-width: 1300px;

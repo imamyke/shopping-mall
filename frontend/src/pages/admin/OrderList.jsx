@@ -71,23 +71,23 @@ const OrderList = () => {
     }
   ];
   
-  // const data = orders?.map(order => (
-  //   {
-  //     key: order._id,
-  //     orderID: order._id,
-  //     name: order.name,
-  //     accountName: order.accountName,
-  //     phone: order.phone,
-  //     admin: order.isAdmin ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />
-  //   }
-  // ))
+  const data = orders?.map(order => (
+    {
+      key: order._id,
+      orderID: order._id,
+      name: order.name,
+      accountName: order.accountName,
+      phone: order.phone,
+      admin: order.isAdmin ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />
+    }
+  ))
   
   return (
     <BackgroundDefault title="订单列表">
       {loading ? <Loader /> : (
         <Table 
         columns={columns} 
-        // dataSource={data} 
+        dataSource={data} 
         onRow={(e) => {
           return {
             onClick: (e) => { console.log(e.target) }

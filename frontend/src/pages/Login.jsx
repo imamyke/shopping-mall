@@ -22,6 +22,7 @@ const Login = () => {
   
   const { search } = useLocation()
   const redirect = search ? `/${search.split('=')[1]}` : '/'
+  
   useEffect(() => {
     if (userInfo) {
       navigate(redirect)
@@ -79,7 +80,9 @@ const Login = () => {
         <StyledContainer>
           <div className="navbar">
             <div className='navbar-logo'>
-              <img src={Logo} width={160} alt="logo"  />
+              <Link to="/">
+                <img src={Logo} width={160} alt="logo"  />
+              </Link>
               <h1 className='title'>欢迎登录</h1>
             </div>
             <p className='login-link'>

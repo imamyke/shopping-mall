@@ -52,11 +52,13 @@ const DefaultTemplate = ({ children }) => {
             <Dropdown menu={{ items }}>
               <Space style={{ color: '#fff', fontSize: 16, cursor: 'pointer' }}>
                 { userInfo ? (
-                  <div>{userInfo.name}</div>
+                  <>
+                    <div>{userInfo.name}</div>
+                    <DownOutlined />
+                  </>
                 ) : (
                   <Link to="/login">登入</Link>
                 )}
-                <DownOutlined />
               </Space>
             </Dropdown>
             </Col>
@@ -135,7 +137,6 @@ const menuItems = [
 const StyledContainer = styled.div`
   min-width: 1500px;
   margin: 0 auto;
-  border: 1px solid #000;
 `
 const StyledHeader = styled.header`
   position: sticky;

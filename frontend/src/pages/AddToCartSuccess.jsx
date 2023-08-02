@@ -11,30 +11,32 @@ const AddToCartSuccess = () => {
 
   const cart = useSelector(state => state.cart)
   const { cartItems } = cart
-  const addItem = cartItems.find(item => item.product === id)
+  const addItem = cartItems?.find(item => item.product === id)
 
   return (
     <DefaultTemplate>
-      <StyledCart>
-        <p className="success-inform">
-          <CheckCircleOutlined /> 商品已成功加入购物车！
-        </p>
-        <div className='product-container'>
-          <StyledImage image={addItem.image}>
-            <div className="image-container">
-              <div className="image"></div>
+      {addItem && (
+        <StyledCart>
+          <p className="success-inform">
+            <CheckCircleOutlined /> 商品已成功加入购物车！
+          </p>
+          <div className='product-container'>
+            <StyledImage image={addItem.image}>
+              <div className="image-container">
+                <div className="image"></div>
+              </div>
+            </StyledImage>
+            <div className='product-info'>
+              <h1 className="title">{addItem.name}</h1>
+              <p className='quantity'>数量 x {addItem.qty}</p>
             </div>
-          </StyledImage>
-          <div className='product-info'>
-            <h1 className="title">{addItem.name}</h1>
-            <p className='quantity'>数量 x {addItem.qty}</p>
+            <div className="product-button">
+              <button className='secondary' onClick={() => navigate(`/product/${id}`)}>查看商品详情</button>
+              <button className='primary' onClick={() => navigate(`/cart`)}>去购物车结算 {'>'}</button>
+            </div>
           </div>
-          <div className="product-button">
-            <button className='secondary' onClick={() => navigate(`/product/${id}`)}>查看商品详情</button>
-            <button className='primary' onClick={() => navigate(`/cart`)}>去购物车结算 {'>'}</button>
-          </div>
-        </div>
-      </StyledCart>
+        </StyledCart>
+      )}
     </DefaultTemplate>
   )
 }
