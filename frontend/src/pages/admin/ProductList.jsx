@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { productListAction, deleteProduct, createProduct } from '../../store/actions'
-import { PlusOutlined } from '@ant-design/icons';
 import { Table } from 'antd';
 import { Loader, BackgroundDefault } from '../../components'
 
@@ -37,16 +36,11 @@ const ProductList = () => {
   const handleCreate = () => {
     dispatch(createProduct())
   }
-
   useEffect(() => {
     if (!userInfo && !userInfo.isAdmin)  {
       navigate('/login')
     } 
-    if (successCreate) {
-      navigate(`/admin/products/${productCreated._id}/edit`)
-    } else {
-      dispatch(productListAction())
-    }
+    dispatch(productListAction())
   }, [dispatch, navigate, userInfo, successCreate, productCreated, successDelete])
 
   const columns = [

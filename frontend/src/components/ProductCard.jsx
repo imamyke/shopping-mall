@@ -1,24 +1,27 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const ProductCard = ({ image, name, price }) => {
+const ProductCard = ({ image, name, price, url }) => {
   return (
-    <StyledProductCard image={image}>
-      <div className='image-container'>
-        <div className="image"></div>
-      </div>
-      <div className="card-content">
-        <p className="card-title">
-          {name}
-        </p>
-        <div className="card-price">
-          $<span className="price">{price}</span>
+    <Link to={url}>
+      <StyledProductCard image={image}>
+        <div className='image-container'>
+          <div className="image"></div>
         </div>
-      </div>
-    </StyledProductCard>
+        <div className="card-content">
+          <p className="card-title">
+            {name}
+          </p>
+          <div className="card-price">
+            ￥<span className="price">{price}</span>
+          </div>
+        </div>
+      </StyledProductCard>
+    </Link>
   )
 }
 
-const StyledProductCard = styled.a`
+const StyledProductCard = styled.div`
   display: block;
   background-color: #fff;
   padding: 30px;

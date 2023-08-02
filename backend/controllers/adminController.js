@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const Product = require('../models/product')
+const Order = require('../models/order')
 const asyncHandler = require('express-async-handler')
 const generateToken = require('../utils/generateToken')
 
@@ -127,6 +128,11 @@ const adminController = {
     }
     res.json(product)
   }),
+  getOrders: asyncHandler(async (req, res) => {
+    const orders = await Order.find({}).populate('user', 'id name')
+    res.json(orders)
+  }),
+  
 }
 
 module.exports = adminController

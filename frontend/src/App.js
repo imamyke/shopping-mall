@@ -9,7 +9,10 @@ import {
   UserList,
   UserEdit,
   ProductList,
-  ProductEdit
+  ProductEdit,
+  OrderList,
+  OrderEdit,
+  AddToCartSuccess
 } from './pages'
 
 function App() {
@@ -20,12 +23,14 @@ function App() {
       <Route exact path='/signup' element={<Signup />} />
       <Route exact path='/product/:id' element={<ProductDetail />} />
       <Route exact path='/cart' element={<Cart />} />
-      <Route exact path='/cart/:id' element={<Cart />} />
+      <Route exact path='/cart/:id' element={<AddToCartSuccess />} />
       <Route exact path='/profile' element={<Profile />} />
       <Route exact path='/admin/userlist' element={<UserList />} />
       <Route exact path='/admin/users/:id/edit' element={<UserEdit />} />
       <Route exact path='/admin/productlist' element={<ProductList />} />
       <Route exact path='/admin/products/:id/edit' element={<ProductEdit />} />
+      <Route exact path='/admin/orderlist' element={<OrderList />} />
+      <Route exact path='/admin/orders/:id/edit' element={<OrderEdit />} />
     </Routes>
   );
 }

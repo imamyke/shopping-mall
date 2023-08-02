@@ -10,6 +10,9 @@ import UserList from './admin/UserList'
 import UserEdit from './admin/UserEdit'
 import ProductList from './admin/ProductList'
 import ProductEdit from './admin/ProducEdit'
+import OrderList from './admin/OrderList'
+import OrderEdit from './admin/OrderEdit'
+import AddToCartSuccess from './AddToCartSuccess'
 
 export { 
   Home, 
@@ -21,5 +24,8 @@ export {
   UserList,
   UserEdit,
   ProductList,
-  ProductEdit
+  ProductEdit,
+  OrderList,
+  OrderEdit,
+  AddToCartSuccess
 }

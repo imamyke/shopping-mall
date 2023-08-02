@@ -40,7 +40,7 @@ const BackgroundDefault = ({ children, title, buttonTitle, onClick }) => {
         </Header>
       </StyledHeader>
       <Sider
-        style={{ marginTop: '70px', height: '100vh' }}
+        style={{ marginTop: '70px' }}
         className='sider'
         breakpoint="lg"
         collapsedWidth="0"

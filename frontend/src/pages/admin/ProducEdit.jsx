@@ -1,8 +1,9 @@
 import styled from 'styled-components'
+import axios from 'axios'
 import { useEffect, useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateProduct, getProduct } from '../../store/actions'
+import { productDetailAction, updateProduct, getProduct } from '../../store/actions'
 import { Loader, BackgroundDefault } from '../../components'
 import { PRODUCT_UPDATE_RESET } from '../../store/types/adminConstants'
 
@@ -13,6 +14,8 @@ const ProductEdit = () => {
 
   const productAdminDetail = useSelector((state) => state.productAdminDetail)
   const { loading, product, error } = productAdminDetail
+  // const productDetail = useSelector((state) => state.productDetail)
+  // const { loading , product, error } = productDetail
 
   const productUpdate = useSelector((state) => state.productUpdate)
   const { loading: loadingUpdate, success: successUpdate } = productUpdate
@@ -28,6 +31,7 @@ const ProductEdit = () => {
   const [color, setColor] = useState(product.color)
   const [style, setStyle] = useState(product.style)
   const [material, setMaterial] = useState(product.material)
+
   
   useEffect(() => {
     if (successUpdate) {
@@ -52,9 +56,6 @@ const ProductEdit = () => {
     
   }, [dispatch, id, product, successUpdate, navigate])
   
-  console.log(product);
-  
-  
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(
@@ -75,6 +76,26 @@ const ProductEdit = () => {
     )
   }
 
+  // upload image
+  const [uploading, setUploading] = useState(false)
+  const handleUploadFile = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }
+      const { data } = await axios.post('/api/upload', formData, config)
+      let path = String.raw`${data}`
+      setImage(path.replace('\\', '/'))
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+  }
   return (
     <BackgroundDefault title="编辑产品信息">
       { loading ? <Loader /> : (
@@ -176,6 +197,15 @@ const ProductEdit = () => {
               id='image'
               type="text" 
               onChange={(e) => setImage(e.target.value)}
+            />
+          </div>
+          { uploading && <Loader /> }
+          <div className='form-item'>
+            <label htmlFor="file">商品图片</label>
+            <input
+              id='file'
+              type="file" 
+              onChange={handleUploadFile}
             />
           </div>
           <button type='submit'>确认</button>
