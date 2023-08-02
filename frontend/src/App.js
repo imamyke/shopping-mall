@@ -14,8 +14,6 @@ import {
   ProductList,
   ProductEdit,
   OrderList,
-  OrderEdit,
-
 } from './pages'
 
 function App() {
@@ -35,7 +33,6 @@ function App() {
       <Route exact path='/admin/productlist' element={<ProductList />} />
       <Route exact path='/admin/products/:id/edit' element={<ProductEdit />} />
       <Route exact path='/admin/orderlist' element={<OrderList />} />
-      <Route exact path='/admin/orders/:id/edit' element={<OrderEdit />} />
     </Routes>
   );
 }

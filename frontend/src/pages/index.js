@@ -11,7 +11,6 @@ import UserEdit from './admin/UserEdit'
 import ProductList from './admin/ProductList'
 import ProductEdit from './admin/ProducEdit'
 import OrderList from './admin/OrderList'
-import OrderEdit from './admin/OrderEdit'
 import AddToCartSuccess from './AddToCartSuccess'
 import FillOrder from './FillOrder'
 import Order from './Order'
@@ -28,7 +27,6 @@ export {
   ProductList,
   ProductEdit,
   OrderList,
-  OrderEdit,
   AddToCartSuccess,
   FillOrder,
   Order

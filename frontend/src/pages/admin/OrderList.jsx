@@ -17,15 +17,6 @@ const OrderList = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  // const userDelete = useSelector((state) => state.userDelete)
-  // const { success } = userDelete;
-
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure")) {
-      // dispatch(deleteUser(id));
-    }
-  }
-
   useEffect(() => {
     if (userInfo && userInfo.isAdmin)  {
       dispatch(orderList())
@@ -61,9 +52,19 @@ const OrderList = () => {
       key: 'isDelivered'
     },
     {
-      title: '是否付款',
+      title: '送达时间',
+      dataIndex: 'deliveredAt',
+      key: 'deliveredAt'
+    },
+    {
+      title: '付款状况',
       dataIndex: 'isPaid',
       key: 'isPaid'
+    },
+    {
+      title: '付款时间',
+      dataIndex: 'paidAt',
+      key: 'paidAt'
     },
     {
       title: '操作',
@@ -71,8 +72,6 @@ const OrderList = () => {
       key: 'action',
       render: (text, record) => (
       <>
-        <button onClick={() => handleDelete(record.orderID)}>删除</button> 
-        <button onClick={() => navigate(`/admin/orders/${record.orderID}/edit`)}>修改</button> 
         <button onClick={() => navigate(`/order/${record.orderID}`)}>訂單詳情</button> 
       </>)
     }
@@ -86,7 +85,9 @@ const OrderList = () => {
       totalPrice: order.totalPrice,
       createdAt: order.createdAt.substring(0, 10),
       isDelivered: order.isDelivered ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />,
-      isPaid: order.isPaid ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />
+      deliveredAt: order.deliveredAt && order.deliveredAt.substring(0, 10),
+      isPaid: order.isPaid ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />,
+      paidAt: order.paidAt && order.paidAt.substring(0, 10)
     }
   ))
   

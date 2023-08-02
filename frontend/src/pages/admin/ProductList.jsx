@@ -24,7 +24,6 @@ const ProductList = () => {
   const { 
     loading : loadingCreate, 
     success: successCreate, 
-    error: errorCreate,
     product: productCreated
   } = productCreate;
 
@@ -80,26 +79,6 @@ const ProductList = () => {
       key: 'typeNum'
     },
     {
-      title: '规格',
-      dataIndex: 'scale',
-      key: 'scale'
-    },
-    {
-      title: '颜色样式',
-      dataIndex: 'color',
-      key: 'color'
-    },
-    {
-      title: '款式',
-      dataIndex: 'style',
-      key: 'style'
-    },
-    {
-      title: '材质',
-      dataIndex: 'material',
-      key: 'material'
-    },
-    {
       title: '操作',
       dataIndex: 'action',
       key: 'action',
@@ -121,11 +100,6 @@ const ProductList = () => {
       price: product.price,
       countInStock: product.countInStock,
       typeNum: product.typeNum,
-      scale: product.scale || '無',
-      color: product.color || '無',
-      style: product.style || '無',
-      material: product.material || '無',
-      rating: product.rating || '無',
     }
   ))
   return (
