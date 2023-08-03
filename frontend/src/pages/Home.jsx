@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Row, Col } from 'antd';
-import { ProductCard, Loader, DefaultTemplate } from '../components'
+import { ProductCard, Loader, DefaultTemplate, ProductCarousel } from '../components'
 import { productListAction } from "../store/actions"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,8 +14,6 @@ const Home = () => {
   
   // 搜尋
   const { keyword } = useParams()
-  console.log(keyword);
-  
   
   useEffect(() => {
     dispatch(productListAction(keyword))
@@ -25,6 +23,7 @@ const Home = () => {
       <Meta />
       <DefaultTemplate>
         { loading && <Loader /> }
+        { !keyword && <ProductCarousel />}
         <Row gutter={12} justify="start">
           {productList?.map(product => (
             <Col span={4} key={product._id} style={{ marginBottom: '10px' }}>

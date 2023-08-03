@@ -7,6 +7,7 @@ import CartTemplate from './CartTemplate'
 import OrderTemplate from './OrderTemplate'
 import Meta from './Meta' 
 import Search from './Search'
+import ProductCarousel from './ProductCarousel'
 
 export { 
   ProductCard, 
@@ -17,5 +18,6 @@ export {
   CartTemplate,
   OrderTemplate,
   Meta,
-  Search 
+  Search,
+  ProductCarousel 
 }

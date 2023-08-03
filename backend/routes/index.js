@@ -10,7 +10,6 @@ const adminOrders = require('./modules/admin/adminOrders')
 
 const uploadRoutes = require('./modules/uploadRoutes')
 
-
 router.use('/api/users', apiGetUsers)
 router.use('/api/products', apiGetProducts)
 router.use('/api/orders', apiGetOrders)

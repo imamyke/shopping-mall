@@ -58,6 +58,10 @@ const productController = {
       throw new Error('Product not found')
     }
   }),
+  getTopRatedProducts: asyncHandler (async (req, res) => {
+    const products = await Product.find({}).sort({ rating: -1 }).limit(3)
+    res.json(products)
+  }),
 }
 
 module.exports = productController

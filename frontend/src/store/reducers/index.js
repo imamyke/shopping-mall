@@ -8,7 +8,8 @@ import {
 import {
   productListReducer,
   productDetailReducer,
-  productReviewCreateReducer
+  productReviewCreateReducer,
+  productTopRatedReducer
 } from "./productReducer"
 
 import {
@@ -59,5 +60,6 @@ export {
   orderListReducer,
   orderAdminPayReducer,
   orderAdminDeliverReducer,
-  productReviewCreateReducer
+  productReviewCreateReducer,
+  productTopRatedReducer
 }
