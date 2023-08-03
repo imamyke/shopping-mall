@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../store/actions'
 
-const OrderTemplate = ({ children, title }) => {
+const OrderTemplate = ({ children, title, background }) => {
   
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
@@ -21,7 +21,7 @@ const OrderTemplate = ({ children, title }) => {
   const items = [
     {
       key: '1',
-      label: (<Link to="/login">个人主页</Link>),
+      label: (<Link to="/profile">个人主页</Link>),
     },
     {
       key: '2',
@@ -44,7 +44,7 @@ const OrderTemplate = ({ children, title }) => {
               </Col>
             )}
             <Col span={2} key="2">
-              <Link to='/'>
+              <Link to='/cart'>
                 <i className="fas fa-shopping-cart"></i>购物车
               </Link>
             </Col>
@@ -81,13 +81,11 @@ const OrderTemplate = ({ children, title }) => {
           </StyledContainer>
         </StyledTopMenu>
       </StyledSearchBar>
-      <div style={{ maxWidth: '1500px', margin: '0 auto' }}>
-        <StyledContainer>
-          <StyledContent>
-            { children }
-          </StyledContent>
-        </StyledContainer>
-      </div>
+      <StyledContentBackground background={background}>
+        <StyledContent>
+          { children }
+        </StyledContent>
+      </StyledContentBackground>
       <Footer />
     </Layout>
   )
@@ -95,8 +93,15 @@ const OrderTemplate = ({ children, title }) => {
 
 export default OrderTemplate
 
+const StyledContentBackground = styled.div`
+  background: ${props => props.background};
+`
+const StyledContent = styled.div`
+  max-width: 1250px; 
+  margin: 0 auto;
+`
 const StyledContainer = styled.div`
-  min-width: 1300px;
+  min-width: 1250px;
   margin: 0 auto;
 `
 const StyledHeader = styled.header`
@@ -119,41 +124,10 @@ const StyledNavbarContainer = styled(StyledContainer)`
   }
 `
 const StyledTopMenu = styled.div`
-  max-width: 1300px;
+  max-width: 1250px;
   margin: 0 auto;
   background: #fff;
 `
-const StyledContent = styled.div`
-  /* margin-top: 10px; */
-  min-width: 1300px;
-`
 const StyledSearchBar = styled.div`
   background: #fff;
-`
-const StyledSearchContainer = styled.div`
-  display: flex;
-  width: 100%;
-  margin-bottom: 24px;
-  input {
-    flex: 1;
-    height: 40px;
-    border: 3px solid #e1251b;
-    padding-left: 10px;
-    &:focus {
-      outline: 0;
-    }
-  }
-  button {
-    cursor: pointer;
-    width: 40px;
-    background-color: #e1251b;
-    border: 0;
-    &:hover {
-      background-color: #c81623;
-    }
-    i {
-      font-size: 16px;
-      color: #fff;
-    }
-  }
 `

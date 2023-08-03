@@ -24,18 +24,20 @@ const Home = () => {
       <DefaultTemplate>
         { loading && <Loader /> }
         { !keyword && <ProductCarousel />}
-        <Row gutter={12} justify="start">
-          {productList?.map(product => (
-            <Col span={4} key={product._id} style={{ marginBottom: '10px' }}>
-              <ProductCard 
-                url={`/product/${product._id}`}
-                image={product.image} 
-                name={product.name}
-                price={product.price}
-              />
-            </Col>
-          ))}
-        </Row>
+        <div style={{ width: '1250px' }}>
+          <Row gutter={12} justify="start">
+            {productList?.map(product => (
+              <Col span={4} key={product._id} style={{ marginBottom: '10px' }}>
+                <ProductCard 
+                  url={`/product/${product._id}`}
+                  image={product.image} 
+                  name={product.name}
+                  price={product.price}
+                />
+              </Col>
+            ))}
+          </Row>
+        </div>
       </DefaultTemplate>
     </>
   )

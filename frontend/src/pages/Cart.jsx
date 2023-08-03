@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import { removeFromCartAction, addToCartAction } from '../store/actions/cartAction'
 import { Alert, message } from 'antd';
+import { Meta } from '../components'
 
 const Cart = () => {
   const { pathname } = useLocation()
@@ -43,84 +44,87 @@ const Cart = () => {
     dispatch(addToCartAction(id, addQty))
   }
   return (
-    <CartTemplate>
-      <StyledTable>
-        <h1 className='product-amount'>
-          全部商品 <span className='amount'>{cartItems.reduce((acc, item) => acc + item.qty, 0)} 件</span>
-        </h1>
-        {cartItems.length === 0 ? (
-          <Alert message="快填满你的购物车吧~" type="error" />
-        ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>商品</th>
-                <th>单价</th>
-                <th>数量</th>
-                <th>小计</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems.map((item, idx) => (
-                <tr key={idx}>
-                  <td>
-                    <Link to={`/product/${item.product}`} style={{ color: '#000' }}>
-                      <StyledCart>
-                        <div className='product-container'>
-                          <StyledImage image={item.image}>
-                            <div className="image-container">
-                              <div className="image"></div>
-                            </div>
-                          </StyledImage>
-                          <div className='product-info'>
-                            <h1 className="title">{item.name}</h1>
-                          </div>
-                        </div>
-                      </StyledCart>
-                    </Link>
-                  </td>
-                  <td className='item'>
-                    <span className='td-item'>
-                      ￥{item.price}
-                    </span>
-                  </td>
-                  <td className='item'>
-                    <div className="stepper td-item">
-                      <div className="minus" onClick={() => handleReduceQuantity(item.product, item.qty)}>
-                        <MinusOutlined />
-                      </div>
-                      <div className="quantity">{item.qty}</div>
-                      <div className="plus" onClick={() => handleAddQuantity(item.product, item.qty)}>
-                        <PlusOutlined />
-                      </div>
-                    </div>
-                  </td>
-                  <td className='item'>
-                    <span className='td-item'>
-                      ￥{(item.price * item.qty).toFixed(2)}
-                    </span>
-                  </td>
-                  <td className='item'>
-                    <button className='delete td-item' onClick={() => handleRemoveFromCart(item.product)}>删除</button>
-                  </td>
+    <>
+      <Meta title="我的购物车" />
+      <CartTemplate background="#fff">
+        <StyledTable>
+          <h1 className='product-amount'>
+            全部商品 <span className='amount'>{cartItems.reduce((acc, item) => acc + item.qty, 0)} 件</span>
+          </h1>
+          {cartItems.length === 0 ? (
+            <Alert message="快填满你的购物车吧~" type="error" />
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>商品</th>
+                  <th>单价</th>
+                  <th>数量</th>
+                  <th>小计</th>
+                  <th>操作</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-        <div className="checkout-container">
-          <p className='total'>
-            总价: 
-            <span className='total-price'>
-               ￥{cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
-            </span>
-          </p>
-          {contextHolder}
-          <button onClick={handleCheckout}>去结算</button>
-        </div>
-      </StyledTable>
-    </CartTemplate>
+              </thead>
+              <tbody>
+                {cartItems.map((item, idx) => (
+                  <tr key={idx}>
+                    <td>
+                      <Link to={`/product/${item.product}`} style={{ color: '#000' }}>
+                        <StyledCart>
+                          <div className='product-container'>
+                            <StyledImage image={item.image}>
+                              <div className="image-container">
+                                <div className="image"></div>
+                              </div>
+                            </StyledImage>
+                            <div className='product-info'>
+                              <h1 className="title">{item.name}</h1>
+                            </div>
+                          </div>
+                        </StyledCart>
+                      </Link>
+                    </td>
+                    <td className='item'>
+                      <span className='td-item'>
+                        ￥{item.price}
+                      </span>
+                    </td>
+                    <td className='item'>
+                      <div className="stepper td-item">
+                        <div className="minus" onClick={() => handleReduceQuantity(item.product, item.qty)}>
+                          <MinusOutlined />
+                        </div>
+                        <div className="quantity">{item.qty}</div>
+                        <div className="plus" onClick={() => handleAddQuantity(item.product, item.qty)}>
+                          <PlusOutlined />
+                        </div>
+                      </div>
+                    </td>
+                    <td className='item'>
+                      <span className='td-item'>
+                        ￥{(item.price * item.qty).toFixed(2)}
+                      </span>
+                    </td>
+                    <td className='item'>
+                      <button className='delete td-item' onClick={() => handleRemoveFromCart(item.product)}>删除</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+          <div className="checkout-container">
+            <p className='total'>
+              总价: 
+              <span className='total-price'>
+                ￥{cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
+              </span>
+            </p>
+            {contextHolder}
+            <button onClick={handleCheckout}>去结算</button>
+          </div>
+        </StyledTable>
+      </CartTemplate>
+    </>
   )
 }
 
@@ -161,7 +165,7 @@ const StyledTable = styled.div`
   table {
     background: #fff;
     width: 100%;
-    border: 1px solid #eee;
+    border: 1px solid #ccc;
     th, td {
       line-height: 20px;
       padding: 0 4px;
@@ -170,7 +174,7 @@ const StyledTable = styled.div`
     th {
       font-weight: bold;
       color: #000;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #ccc;
     }
     td {
       border-collapse: collapse;
@@ -211,7 +215,7 @@ const StyledTable = styled.div`
 `
 
 const StyledCart = styled.div`
-  margin: 10px 0;
+  margin: 10px;
   .success-inform {
     color: #71b247;
     line-height: 30px;
@@ -225,7 +229,7 @@ const StyledCart = styled.div`
     .product-info {
       padding: 10px;
       .title {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
       }
       .quantity {

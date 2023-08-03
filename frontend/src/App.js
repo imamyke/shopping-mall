@@ -14,6 +14,8 @@ import {
   ProductList,
   ProductEdit,
   OrderList,
+  MyOrders,
+  EditProfile
 } from './pages'
 
 function App() {
@@ -28,7 +30,9 @@ function App() {
       <Route exact path='/cart/:id' element={<AddToCartSuccess />} />
       <Route exact path='/fillorder' element={<FillOrder />} />
       <Route exact path='/order/:id' element={<Order />} />
+      <Route exact path='/myorders' element={<MyOrders />} />
       <Route exact path='/profile' element={<Profile />} />
+      <Route exact path='/editprofile' element={<EditProfile />} />
       <Route exact path='/admin/userlist' element={<UserList />} />
       <Route exact path='/admin/users/:id/edit' element={<UserEdit />} />
       <Route exact path='/admin/productlist' element={<ProductList />} />

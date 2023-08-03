@@ -4,6 +4,7 @@ import Signup from './Signup'
 import Cart from './Cart'
 import ProductDetail from './ProductDetail'
 import Profile from './Profile'
+import MyOrders from './MyOrders'
 
 // admin pages
 import UserList from './admin/UserList'
@@ -14,6 +15,7 @@ import OrderList from './admin/OrderList'
 import AddToCartSuccess from './AddToCartSuccess'
 import FillOrder from './FillOrder'
 import Order from './Order'
+import EditProfile from './EditProfile'
 
 export { 
   Home, 
@@ -29,5 +31,7 @@ export {
   OrderList,
   AddToCartSuccess,
   FillOrder,
-  Order
+  Order,
+  MyOrders,
+  EditProfile
 }

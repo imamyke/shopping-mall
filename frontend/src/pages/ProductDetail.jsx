@@ -67,7 +67,7 @@ const ProductDetail = () => {
   return (
     <>
       <Meta title={product.name} />
-      <DefaultTemplate>
+      <DefaultTemplate background="#fff">
         { loading && <Loader /> }
         <StyledCart>
           <Row>

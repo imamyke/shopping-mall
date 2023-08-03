@@ -8,6 +8,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { signup } from '../store/actions'
+import { Meta } from '../components'
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -73,6 +74,7 @@ const Signup = () => {
 
   return (
     <>
+      <Meta title="欢迎注册" />
       <StyledLoginNavbar>
         <StyledContainer>
           <div className="navbar">

@@ -4,7 +4,6 @@ import { productTopRated } from '../store/actions/productAction'
 import { useEffect } from 'react'
 import { Loader } from '../components'
 
-
 const ProductCarousel = () => {
   const dispatch = useDispatch()
   const productTop = useSelector(state => state.productTopRated)
@@ -17,7 +16,7 @@ const ProductCarousel = () => {
   return loading ? <Loader /> : (
       <Carousel autoplay>
         {products?.map(product => (
-          <div>{product.name}</div>
+          <div key={product._id}>{product.name}</div>
         ))}
       </Carousel>
     )

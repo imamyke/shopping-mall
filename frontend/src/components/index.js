@@ -8,6 +8,7 @@ import OrderTemplate from './OrderTemplate'
 import Meta from './Meta' 
 import Search from './Search'
 import ProductCarousel from './ProductCarousel'
+import DefaultProfileTemplate from './DefaultProfileTemplate'
 
 export { 
   ProductCard, 
@@ -19,5 +20,6 @@ export {
   OrderTemplate,
   Meta,
   Search,
-  ProductCarousel 
+  ProductCarousel,
+  DefaultProfileTemplate 
 }

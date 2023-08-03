@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addToCartAction, getOrderDetailAction, orderUpdatePaid, orderUpdateDelivered } from "../store/actions"
 import { Alert } from 'antd'
 import { ORDER_UPDATE_DELIVER_RESET, ORDER_UPDATE_PAY_RESET } from "../store/types/adminConstants"
+import { Meta } from '../components'
 
 const Order = () => {
   const navigate = useNavigate()
@@ -63,87 +64,90 @@ const Order = () => {
   }, [dispatch, id, userInfo, navigate, successPay, successDeliver, order])
   
   return loading ? <Loader /> :(
-    <OrderTemplate title="订单详情">
-      <StyledBlock>
-        <div>
-          <h1>
-            <i class="fa-regular fa-circle-user" style={{ marginRight: '4px' }}></i> 
-            {order.shippingDetail.name}
-            <span className='order-phone'>{phoneTransfer(order.shippingDetail.phone)}</span>
-            <span 
-              className='order-phone' 
-              style={{ marginLeft: '8px', color: order.isDelivered && 'rgb(225, 37, 27)' }}
-            >
-              {order.isDelivered ? "已完成運送" : "运送中"}
-            </span>
-            <span 
-              className='order-phone' 
-              style={{ marginLeft: '8px', color: order.isPaid && 'rgb(225, 37, 27)' }}
-            >
-              {order.isPaid ? "已付款" : "未付款"}
-            </span>
-          </h1>
-          <span className='order-address'>地址: {order.shippingDetail.address}</span>
-        </div>
-        { loadingDeliver && <Loader /> }
-        { loadingPay && <Loader /> }
-        
-        <div>
-        { userInfo && userInfo.isAdmin && !order.isDelivered && (
-          <button onClick={handleDeliver}>完成運送</button>
-        )}
-        { userInfo && userInfo.isAdmin && !order.isPaid && (
-          <button onClick={handlePay}>完成付款</button>
-        )}
-        </div>
-      </StyledBlock>
-      <h1 className="fill-title" style={{ marginTop: 10, fontSize: 20, fontWeight: 'bold' }}>订单內容</h1>
-      <StyledOrder>
-        <StyledCart>
-          <h1>送货清单</h1>
-          {order.orderItems.map(item => (
-            <div className='product-container'>
-              <StyledImage image={item.image}>
-                <div className="image-container">
-                  <div className="image"></div>
+    <>
+      <Meta title="订单详情" />
+      <OrderTemplate title="订单详情">
+        <StyledBlock>
+          <div>
+            <h1>
+              <i class="fa-regular fa-circle-user" style={{ marginRight: '4px' }}></i> 
+              {order.shippingDetail.name}
+              <span className='order-phone'>{phoneTransfer(order.shippingDetail.phone)}</span>
+              <span 
+                className='order-phone' 
+                style={{ marginLeft: '8px', color: order.isDelivered && 'rgb(225, 37, 27)' }}
+              >
+                {order.isDelivered ? "已完成運送" : "运送中"}
+              </span>
+              <span 
+                className='order-phone' 
+                style={{ marginLeft: '8px', color: order.isPaid && 'rgb(225, 37, 27)' }}
+              >
+                {order.isPaid ? "已付款" : "未付款"}
+              </span>
+            </h1>
+            <span className='order-address'>地址: {order.shippingDetail.address}</span>
+          </div>
+          { loadingDeliver && <Loader /> }
+          { loadingPay && <Loader /> }
+          
+          <div>
+          { userInfo && userInfo.isAdmin && !order.isDelivered && (
+            <button onClick={handleDeliver}>完成運送</button>
+          )}
+          { userInfo && userInfo.isAdmin && !order.isPaid && (
+            <button onClick={handlePay}>完成付款</button>
+          )}
+          </div>
+        </StyledBlock>
+        <h1 className="fill-title" style={{ marginTop: 10, fontSize: 20, fontWeight: 'bold' }}>订单內容</h1>
+        <StyledOrder>
+          <StyledCart>
+            <h1>送货清单</h1>
+            {order.orderItems.map(item => (
+              <div className='product-container'>
+                <StyledImage image={item.image}>
+                  <div className="image-container">
+                    <div className="image"></div>
+                  </div>
+                </StyledImage>
+                <div className='product-info'>
+                  <h1 className="title">{item.name}</h1>
+                  <Alert type="warning" message="支持7天无理由退货" />
                 </div>
-              </StyledImage>
-              <div className='product-info'>
-                <h1 className="title">{item.name}</h1>
-                <Alert type="warning" message="支持7天无理由退货" />
+                <div className="order-price">
+                  ￥{item.price}
+                </div> 
+                <div className="order-quantity">
+                  x {item.qty}
+                </div>  
               </div>
-              <div className="order-price">
-                ￥{item.price}
-              </div> 
-              <div className="order-quantity">
-                x {item.qty}
-              </div>  
-            </div>
-          ))}
-        </StyledCart>
-        <StyledPaymentContainer>
-          <h1>支付內容</h1>
-          <table>
-            <tr>
-              <th>实付款</th>
-              <td>合計 ￥<span>{addDecimals(order.orderItems.reduce((acc, item) => acc + item.qty * item.price, 0))}</span></td>
-            </tr>
-            <tr>
-              <th>订单编号</th>
-              <td>{order._id}</td>
-            </tr>
-            <tr>
-              <th>支付方式</th>
-              <td>{order.paymentMethod}</td>
-            </tr>
-            <tr>
-              <th>下单时间</th>
-              <td>{order.createdAt.substring(0, 10)}</td>
-            </tr>
-          </table>
-        </StyledPaymentContainer>
-      </StyledOrder>
-    </OrderTemplate>
+            ))}
+          </StyledCart>
+          <StyledPaymentContainer>
+            <h1>支付內容</h1>
+            <table>
+              <tr>
+                <th>实付款</th>
+                <td>合計 ￥<span>{addDecimals(order.orderItems.reduce((acc, item) => acc + item.qty * item.price, 0))}</span></td>
+              </tr>
+              <tr>
+                <th>订单编号</th>
+                <td>{order._id}</td>
+              </tr>
+              <tr>
+                <th>支付方式</th>
+                <td>{order.paymentMethod}</td>
+              </tr>
+              <tr>
+                <th>下单时间</th>
+                <td>{order.createdAt.substring(0, 10)}</td>
+              </tr>
+            </table>
+          </StyledPaymentContainer>
+        </StyledOrder>
+      </OrderTemplate>
+    </>
   )
 }
 
