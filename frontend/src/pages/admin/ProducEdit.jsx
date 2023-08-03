@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { productDetailAction, updateProduct, getProduct } from '../../store/actions'
-import { Loader, BackgroundDefault } from '../../components'
+import { Loader, BackgroundDefault, Meta } from '../../components'
 import { PRODUCT_UPDATE_RESET } from '../../store/types/adminConstants'
 
 const ProductEdit = () => {
@@ -98,121 +98,124 @@ const ProductEdit = () => {
     }
   }
   return (
-    <BackgroundDefault title="编辑产品信息">
-      { loading ? <Loader /> : (
-        <StyledForm onSubmit={handleSubmit}>
-          <div className='form-item'>
-            <label htmlFor="name">商品名称</label>
-            <input
-              value={name}              
-              id='name' 
-              type="text" 
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="brand">品牌</label>
-            <input
-              value={brand}
-              id='brand' 
-              type="text" 
-              onChange={(e) => setBrand(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="category">分类</label>
-            <input
-              value={category}
-              id='category'
-              type="text" 
-              onChange={(e) => setCategory(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="price">价格</label>
-            <input
-              value={price}
-              id='price'
-              type="text" 
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="countInStock">库存量</label>
-            <input
-              value={countInStock}
-              id='countInStock'
-              type="text" 
-              onChange={(e) => setCountInStock(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="typeNum">型号</label>
-            <input
-              value={typeNum}
-              id='typeNum'
-              type="text" 
-              onChange={(e) => setTypeNum(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="scale">规格</label>
-            <input
-              value={scale}
-              id='scale'
-              type="text" 
-              onChange={(e) => setScale(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="color">颜色样式</label>
-            <input
-              value={color}
-              id='color'
-              type="text" 
-              onChange={(e) => setColor(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="style">款式</label>
-            <input
-              value={style}
-              id='style'
-              type="text" 
-              onChange={(e) => setStyle(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="material">材质</label>
-            <input
-              value={material}
-              id='material'
-              type="text" 
-              onChange={(e) => setMaterial(e.target.value)}
-            />
-          </div>
-          <div className='form-item'>
-            <label htmlFor="image">商品图片</label>
-            <input
-              value={image}
-              id='image'
-              type="text" 
-              onChange={(e) => setImage(e.target.value)}
-            />
-          </div>
-          { uploading && <Loader /> }
-          <div className='form-item'>
-            <label htmlFor="file">商品图片</label>
-            <input
-              id='file'
-              type="file" 
-              onChange={handleUploadFile}
-            />
-          </div>
-          <button type='submit'>确认</button>
-        </StyledForm>
-      )}
-    </BackgroundDefault>
+    <>
+      <Meta title="编辑产品信息" />
+      <BackgroundDefault title="编辑产品信息">
+        { loading ? <Loader /> : (
+          <StyledForm onSubmit={handleSubmit}>
+            <div className='form-item'>
+              <label htmlFor="name">商品名称</label>
+              <input
+                value={name}              
+                id='name' 
+                type="text" 
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="brand">品牌</label>
+              <input
+                value={brand}
+                id='brand' 
+                type="text" 
+                onChange={(e) => setBrand(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="category">分类</label>
+              <input
+                value={category}
+                id='category'
+                type="text" 
+                onChange={(e) => setCategory(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="price">价格</label>
+              <input
+                value={price}
+                id='price'
+                type="text" 
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="countInStock">库存量</label>
+              <input
+                value={countInStock}
+                id='countInStock'
+                type="text" 
+                onChange={(e) => setCountInStock(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="typeNum">型号</label>
+              <input
+                value={typeNum}
+                id='typeNum'
+                type="text" 
+                onChange={(e) => setTypeNum(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="scale">规格</label>
+              <input
+                value={scale}
+                id='scale'
+                type="text" 
+                onChange={(e) => setScale(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="color">颜色样式</label>
+              <input
+                value={color}
+                id='color'
+                type="text" 
+                onChange={(e) => setColor(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="style">款式</label>
+              <input
+                value={style}
+                id='style'
+                type="text" 
+                onChange={(e) => setStyle(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="material">材质</label>
+              <input
+                value={material}
+                id='material'
+                type="text" 
+                onChange={(e) => setMaterial(e.target.value)}
+              />
+            </div>
+            <div className='form-item'>
+              <label htmlFor="image">商品图片</label>
+              <input
+                value={image}
+                id='image'
+                type="text" 
+                onChange={(e) => setImage(e.target.value)}
+              />
+            </div>
+            { uploading && <Loader /> }
+            <div className='form-item'>
+              <label htmlFor="file">商品图片</label>
+              <input
+                id='file'
+                type="file" 
+                onChange={handleUploadFile}
+              />
+            </div>
+            <button type='submit'>确认</button>
+          </StyledForm>
+        )}
+      </BackgroundDefault>
+    </>
   )
 }
 

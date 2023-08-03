@@ -1,7 +1,11 @@
-import { Meta, DefaultProfileTemplate } from '../components'
+import { Meta, DefaultProfileTemplate, Loader } from '../components'
 import styled from 'styled-components'
 import { Row, Col, Avatar, Carousel } from 'antd'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserDetail } from '../store/actions'
 import { 
   UserOutlined, 
   RedEnvelopeOutlined,
@@ -54,90 +58,109 @@ const service_second = [
   { name: '白条', value: <ProfileOutlined /> },
 ]
 
-
 const Profile = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+  const userDetail = useSelector(state => state.userDetail)
+  const { loading, user } = userDetail
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/')
+    } else {
+      if (!user || !user.name) {
+        dispatch(getUserDetail('profile'))
+      }
+    }
+  }, [userInfo, navigate, dispatch, user])
+
   return (
     <>
       <Meta title="个人信息" />
-      <DefaultProfileTemplate>
-        <Row>
-          <Col>
-            <StyledProfile>
-              <div className="profile">
-                <Avatar size={64} icon={<UserOutlined />} style={{ backgroundColor: 'rgb(226, 152, 148)' }} />
-                <p className='user'>使用者</p>
-                <Link to="/editprofile" className='edit-profile'>编辑个人信息</Link>
-              </div>
-            </StyledProfile>
-          </Col>
-          <Col className="my-wallet" style={{ flex: 1 }}>
-            <StyledWallet>
-              <h2>我的钱包</h2>
-              <ul className='wallet-list'>
-                {walletList.map(item => (
-                  <li className='list-item'>
-                    <p className="value">{item.value}</p>
-                    <span className="name">{item.name}</span>
-                  </li>
-                ))}
-              </ul>
-            </StyledWallet>
-          </Col>
-        </Row>
-        <Row gutter={20} style={{ marginTop: 20 }}>
-          <Col span={16}>
-            <StyledOrderList>
-              <h2>我的订单</h2>
-              <ul className='order-list'>
-                {orderList.map(item => (
-                  <li className='list-item'>
-                    <Link to='/'>
+      { loading ? <Loader />  : (
+        <DefaultProfileTemplate>
+          <Row>
+            <Col>
+              <StyledProfile>
+                <div className="profile">
+                  <Avatar size={64} icon={<UserOutlined />} style={{ backgroundColor: 'rgb(226, 152, 148)' }} />
+                  <p className='user'>{user.name}</p>
+                  <Link to="/editprofile" className='edit-profile'>编辑个人信息</Link>
+                </div>
+              </StyledProfile>
+            </Col>
+            <Col className="my-wallet" style={{ flex: 1 }}>
+              <StyledWallet>
+                <h2>我的钱包</h2>
+                <ul className='wallet-list'>
+                  {walletList.map(item => (
+                    <li className='list-item'>
                       <p className="value">{item.value}</p>
                       <span className="name">{item.name}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </StyledOrderList>
-          </Col>
-          <Col span={8}>
-            <StyledOrderList style={{ marginBottom: 20 }}>
-              <h2>我的关注</h2>
-              <ul className='order-list'>
-                {myFocusList.map(item => (
-                  <li className='list-item'>
-                    <Link to='/'>
-                      <p className="value">{item.value}</p>
-                      <span className="name">{item.name}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </StyledOrderList>
-            <StyledOrderList >
-              <h2>生活服务</h2>
-              <ul className='service-list'>
-                  {service_first.map(item => (
-                    <li className='service-list-item'>
+                    </li>
+                  ))}
+                </ul>
+              </StyledWallet>
+            </Col>
+          </Row>
+          <Row gutter={20} style={{ marginTop: 20 }}>
+            <Col span={16}>
+              <StyledOrderList>
+                <h2>我的订单</h2>
+                <ul className='order-list'>
+                  {orderList.map(item => (
+                    <li className='list-item'>
                       <Link to='/'>
                         <p className="value">{item.value}</p>
                         <span className="name">{item.name}</span>
                       </Link>
                     </li>
                   ))}
-                  {/* {service_second.map(item => (
-                    <li className='service-list-item'>
+                </ul>
+              </StyledOrderList>
+            </Col>
+            <Col span={8}>
+              <StyledOrderList style={{ marginBottom: 20 }}>
+                <h2>我的关注</h2>
+                <ul className='order-list'>
+                  {myFocusList.map(item => (
+                    <li className='list-item'>
                       <Link to='/'>
                         <p className="value">{item.value}</p>
                         <span className="name">{item.name}</span>
                       </Link>
                     </li>
-                  ))} */}
-              </ul>
-            </StyledOrderList>
-          </Col>
-        </Row>
-      </DefaultProfileTemplate>
+                  ))}
+                </ul>
+              </StyledOrderList>
+              <StyledOrderList >
+                <h2>生活服务</h2>
+                <ul className='service-list'>
+                    {service_first.map(item => (
+                      <li className='service-list-item'>
+                        <Link to='/'>
+                          <p className="value">{item.value}</p>
+                          <span className="name">{item.name}</span>
+                        </Link>
+                      </li>
+                    ))}
+                    {/* {service_second.map(item => (
+                      <li className='service-list-item'>
+                        <Link to='/'>
+                          <p className="value">{item.value}</p>
+                          <span className="name">{item.name}</span>
+                        </Link>
+                      </li>
+                    ))} */}
+                </ul>
+              </StyledOrderList>
+            </Col>
+          </Row>
+        </DefaultProfileTemplate>
+      )}
     </>
   )
 }

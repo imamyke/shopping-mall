@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import axios from "axios"
 import { message } from "antd"
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { DefaultProfileTemplate, Meta, Loader } from "../components"
@@ -9,7 +9,6 @@ import { getUserDetail, updateUserProfile } from '../store/actions'
 import { USER_UPDATE_PROFILE_RESET } from '../store/types/userConstants'
 
 const EditProfile = () => {
-  const inputRef = useRef(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -88,7 +87,6 @@ const EditProfile = () => {
               <div className='form-item'>
                 <label htmlFor="name">名稱</label>
                 <input 
-                  // ref={inputRef}
                   id='name' type="text" 
                   placeholder='请输入名稱' 
                   value={name}
@@ -99,7 +97,6 @@ const EditProfile = () => {
               <div className='form-item'>
                 <label htmlFor="accountName">帐号名</label>
                 <input 
-                  // ref={inputRef}
                   id='accountName' type="text" 
                   placeholder='请输入帐号名' 
                   value={accountName}
@@ -110,7 +107,6 @@ const EditProfile = () => {
               <div className='form-item'>
                 <label htmlFor="phone">手机号码</label>
                 <input id='phone' type="text" 
-                  // ref={inputRef}
                   placeholder='请输入手机号码'
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}

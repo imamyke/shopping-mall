@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const Footer = () => {
   return (
     <StyledFooter>
-      Copyright &copy 2023 SSU YU KE
+      Copyright@2023 SSU YU KE
     </StyledFooter>
   )
 }

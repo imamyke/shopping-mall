@@ -25,8 +25,8 @@ const MenuList = ({ menu, border }) => (
   <StyledMenu border={border}>
     <h1 className='menu-title'>{menu.title}</h1>
     <ul>
-      {menu.list.map(item => (
-        <li className='menu-item'>
+      {menu.list.map((item, idx) => (
+        <li key={idx} className='menu-item'>
           <Link to={item.link}>{item.name}</Link>
         </li>
       ))}

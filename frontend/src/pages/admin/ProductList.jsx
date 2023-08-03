@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { productListAction, deleteProduct, createProduct } from '../../store/actions'
 import { Table } from 'antd';
-import { Loader, BackgroundDefault } from '../../components'
+import { Loader, BackgroundDefault, Meta } from '../../components'
 
 const ProductList = () => {
 
@@ -103,21 +103,24 @@ const ProductList = () => {
     }
   ))
   return (
-    <BackgroundDefault title="产品列表" buttonTitle="添加产品" onClick={handleCreate}>
-      { loadingDelete && <Loader /> }
-      { loadingCreate && <Loader /> }
-      { loading ? <Loader /> : (
-        <Table 
-        columns={columns} 
-        dataSource={data} 
-        onRow={() => {
-          return {
-            onClick: (e) => { console.log(e.target) }
-          }
-        }}
-      />
-      )}
-    </BackgroundDefault>
+    <>
+      <Meta title="产品管理" />
+      <BackgroundDefault title="产品列表" buttonTitle="添加产品" onClick={handleCreate}>
+        { loadingDelete && <Loader /> }
+        { loadingCreate && <Loader /> }
+        { loading ? <Loader /> : (
+          <Table 
+          columns={columns} 
+          dataSource={data} 
+          onRow={() => {
+            return {
+              onClick: (e) => { console.log(e.target) }
+            }
+          }}
+        />
+        )}
+      </BackgroundDefault>
+    </>
     
   )
 }

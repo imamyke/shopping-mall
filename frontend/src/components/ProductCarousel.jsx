@@ -16,7 +16,9 @@ const ProductCarousel = () => {
   return loading ? <Loader /> : (
       <Carousel autoplay>
         {products?.map(product => (
-          <div key={product._id}>{product.name}</div>
+          <div key={product._id}>
+            <img src={product.image} width="100%" height={524} alt={product.name} style={{ objectFit: 'cover' }} />
+          </div>
         ))}
       </Carousel>
     )

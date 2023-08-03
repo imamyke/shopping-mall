@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listUser, deleteUser } from '../../store/actions'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Table } from 'antd';
-import { Loader, BackgroundDefault } from '../../components'
+import { Loader, BackgroundDefault, Meta } from '../../components'
 
 const UserList = () => {
 
@@ -83,19 +83,22 @@ const UserList = () => {
   ))
   
   return (
-    <BackgroundDefault title="用戶列表">
-      {loading ? <Loader /> : (
-        <Table 
-        columns={columns} 
-        dataSource={data} 
-        onRow={(e) => {
-          return {
-            onClick: (e) => { console.log(e.target) }
-          }
-        }}
-      />
-      )}
-    </BackgroundDefault>
+    <>
+      <Meta title="用户管理" />
+      <BackgroundDefault title="用戶列表">
+        {loading ? <Loader /> : (
+          <Table 
+          columns={columns} 
+          dataSource={data} 
+          onRow={(e) => {
+            return {
+              onClick: (e) => { console.log(e.target) }
+            }
+          }}
+        />
+        )}
+      </BackgroundDefault>
+    </>
     
   )
 }

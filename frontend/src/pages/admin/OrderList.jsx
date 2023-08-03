@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { orderList } from '../../store/actions'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Table } from 'antd';
-import { Loader, BackgroundDefault } from '../../components'
+import { Loader, BackgroundDefault, Meta } from '../../components'
 
 const OrderList = () => {
 
@@ -92,20 +92,22 @@ const OrderList = () => {
   ))
   
   return (
-    <BackgroundDefault title="订单列表">
-      {loading ? <Loader /> : (
-        <Table 
-        columns={columns} 
-        dataSource={data} 
-        onRow={(e) => {
-          return {
-            onClick: (e) => { console.log(e.target) }
-          }
-        }}
-      />
-      )}
-    </BackgroundDefault>
-    
+    <>
+      <Meta title="订单管理" />
+      <BackgroundDefault title="订单列表">
+        {loading ? <Loader /> : (
+          <Table 
+          columns={columns} 
+          dataSource={data} 
+          onRow={(e) => {
+            return {
+              onClick: (e) => { console.log(e.target) }
+            }
+          }}
+        />
+        )}
+      </BackgroundDefault>
+    </>
   )
 }
 
