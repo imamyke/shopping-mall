@@ -5,12 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { productDetailAction, addToCartAction, createProductReview } from "../store/actions"
 import { useEffect, useState } from "react"
 import { Loader, DefaultTemplate } from '../components'
-import { Row, Col, Rate, Alert, Input, Avatar } from 'antd';
+import { Row, Col, Rate, Alert, Avatar } from 'antd';
 import { PRODUCT_CREATE_REVIEW_RESET } from "../store/types/productConstants";
 import { Meta } from "../components";
 
 const ProductDetail = () => {
-  const { TextArea } = Input
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
@@ -139,11 +138,12 @@ const ProductDetail = () => {
                     <div className="form-item">
                       <span className="item-title" style={{ width: '10%' }}>商品评分</span> 
                       <Rate 
-                        style={{ width: '90%' }} 
+                        style={{ marginRight: '10px' }}
                         value={rating} 
                         allowHalf 
                         onChange={(value) => setRating(value)}
                       />
+                      <span className="item-title">( {rating ? rating : 0} )分</span>
                     </div>
                     <div className="form-item">
                       <span className="item-title" style={{ width: '10%' }}>评价晒单</span>

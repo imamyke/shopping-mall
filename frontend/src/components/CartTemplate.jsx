@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Layout, Dropdown, Space, Row, Col, Image  } from 'antd';
-import { Footer } from '../components'
+import { Footer, Search } from '../components'
 import { productListAction } from "../store/actions"
 import { useEffect } from "react"
 
@@ -77,15 +77,7 @@ const CartTemplate = ({ children }) => {
                 </Link>
               </Col>
               <Col span={12} style={{ alignSelf: 'end', marginBottom: '14px' }}>
-                <StyledSearchContainer>
-                  <input 
-                    type="text"
-                    placeholder='请输入商品...'
-                  />
-                  <button type='button'>
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </button>
-                </StyledSearchContainer>
+                <Search marginBottom={24} />
               </Col>
             </Row>
           </StyledContainer>
@@ -140,30 +132,4 @@ const StyledContent = styled.div`
 const StyledSearchBar = styled.div`
   background: #fff;
 `
-const StyledSearchContainer = styled.div`
-  display: flex;
-  width: 100%;
-  margin-bottom: 24px;
-  input {
-    flex: 1;
-    height: 40px;
-    border: 3px solid #e1251b;
-    padding-left: 10px;
-    &:focus {
-      outline: 0;
-    }
-  }
-  button {
-    cursor: pointer;
-    width: 40px;
-    background-color: #e1251b;
-    border: 0;
-    &:hover {
-      background-color: #c81623;
-    }
-    i {
-      font-size: 16px;
-      color: #fff;
-    }
-  }
-`
+

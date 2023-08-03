@@ -6,6 +6,7 @@ import DefaultTemplate from './DefaultTemplate'
 import CartTemplate from './CartTemplate'
 import OrderTemplate from './OrderTemplate'
 import Meta from './Meta' 
+import Search from './Search'
 
 export { 
   ProductCard, 
@@ -15,5 +16,6 @@ export {
   DefaultTemplate,
   CartTemplate,
   OrderTemplate,
-  Meta 
+  Meta,
+  Search 
 }

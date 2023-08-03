@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Layout, Dropdown, Space, Row, Col, Image  } from 'antd';
-import { Footer } from '../components'
+import { Footer, Search } from '../components'
 import { productListAction } from "../store/actions"
 import { useEffect } from "react"
 
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../store/actions'
 
 const DefaultTemplate = ({ children }) => {
-  
+
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -79,15 +79,7 @@ const DefaultTemplate = ({ children }) => {
                 </Link>
               </Col>
               <Col span={12} style={{ alignSelf: 'end', marginBottom: '14px' }}>
-                <StyledSearchContainer>
-                  <input 
-                    type="text"
-                    placeholder='请输入商品...'
-                  />
-                  <button type='button'>
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </button>
-                </StyledSearchContainer>
+                <Search />
                 <StyledUnderList>
                   {
                     menuItems.map((item, idx) => 

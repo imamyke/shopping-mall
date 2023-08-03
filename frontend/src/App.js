@@ -20,6 +20,7 @@ function App() {
   return (
     <Routes>
       <Route exact path='/' element={<Home />} />
+      <Route exact path='/search/:keyword' element={<Home />} />
       <Route exact path='/login' element={<Login />} />
       <Route exact path='/signup' element={<Signup />} />
       <Route exact path='/product/:id' element={<ProductDetail />} />
