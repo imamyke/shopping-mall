@@ -34,7 +34,6 @@ const StyledProductCard = styled.div`
   .image-container {
     position: relative;
     width: 100%;
-    background: #000;
     transition: opacity 0.3s ease-out;
   }
   .image-container:before {

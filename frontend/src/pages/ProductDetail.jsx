@@ -362,7 +362,7 @@ const StyledImage = styled.div`
   .image-container {
     position: relative;
     width: 100%;
-    background: #000;
+    /* background: #000; */
   }
   .image-container:before {
     display: block;

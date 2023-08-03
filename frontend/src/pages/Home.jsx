@@ -9,7 +9,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const Home = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const results = useSelector(state => state.productList)
   const { loading, productList } = results
   
