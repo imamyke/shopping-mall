@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import { useNavigate, useParams } from 'react-router-dom'
-import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
+import { PlusOutlined, MinusOutlined, UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { productDetailAction, addToCartAction, createProductReview } from "../store/actions"
 import { useEffect, useState } from "react"
 import { Loader, DefaultTemplate } from '../components'
-import { Row, Col, Rate, Alert, Input } from 'antd';
+import { Row, Col, Rate, Alert, Input, Avatar } from 'antd';
 import { PRODUCT_CREATE_REVIEW_RESET } from "../store/types/productConstants";
 import { Meta } from "../components";
 
@@ -38,7 +38,7 @@ const ProductDetail = () => {
       setRating(0)
       setComment('')
     }
-    if (!product._id || product._id !== id) {
+    if (!product._id || successProductReview || product._id !== id) {
       dispatch(productDetailAction(id))
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
     }
@@ -64,8 +64,6 @@ const ProductDetail = () => {
       createProductReview(id, { rating, comment })
     )
   }
-  console.log(rating);
-  console.log(comment);
 
   return (
     <>
@@ -132,44 +130,73 @@ const ProductDetail = () => {
               </div>
             </Col>
           </Row>
-          <Row>
+          <Row gutter={16}>
             <Col span={12}>
-              <h2>Reviews</h2>
-              { product.reviews.length === 0 && <Alert message="目前没有评论" type="info" /> }
-              <ul>
-                {product.reviews.map((review) => (
-                  <li key={review._id}>
-                    <strong>{review.name}</strong>
-                    <Rate disabled value={review.rating} />
-                    <p>{review.createdAt.substring(0, 10)}</p>
-                    <p>{review.comment}</p>
-                  </li>
-                ))}
-              </ul>
-              <li>
-                <h2>写下你的评论吧</h2>
-                { loadingProductReview && <Loader /> }
+              { loadingProductReview && <Loader /> }
+              <StyledComment>
                 { userInfo ? (
                   <form onSubmit={handleSubmit}>
                     <div className="form-item">
-                      <Rate value={rating} allowHalf onChange={(value) => setRating(value)} />
+                      <span className="item-title" style={{ width: '10%' }}>商品评分</span> 
+                      <Rate 
+                        style={{ width: '90%' }} 
+                        value={rating} 
+                        allowHalf 
+                        onChange={(value) => setRating(value)}
+                      />
                     </div>
                     <div className="form-item">
-                      <TextArea
+                      <span className="item-title" style={{ width: '10%' }}>评价晒单</span>
+                      <textarea 
+                        className="textarea"
+                        style={{ width: '90%' }}
+                        name="textarea" 
+                        id="textarea" 
                         placeholder='请输入你的評論'
-                        autoSize={{ minRows: 3, maxRows: 5 }}
+                        cols="30" 
+                        rows="5" 
                         onChange={(e) => setComment(e.target.value)}
                       />
                     </div>
-                    <button 
-                      type="submit"
-                      disabled={loadingProductReview}
-                      >提交评论</button>
+                    <div className="button-container">
+                      <button 
+                        type="submit"
+                        disabled={loadingProductReview}
+                        >提交评论
+                      </button>
+                    </div>
                   </form>
                 ) : (
                   <Alert message="請登入來寫下你的評論" type="warning" />
-                )}
-              </li>
+                  )}
+              </StyledComment>
+            </Col>
+            <Col span={12}>
+            <StyledComment>
+              <h1>商品评论</h1>
+                <ul>
+                { product.reviews.length === 0 && <Alert message="目前没有评论" type="info" /> }
+                  {product.reviews.map((review) => (
+                    <li key={review._id} className="comment-item">
+                      <div className="avatar">
+                        <Avatar
+                          style={{
+                            backgroundColor: 'rgb(225, 114, 109)'
+                          }}
+                          icon={<UserOutlined />}
+                        />
+                        <strong className="user-name">{review.name}</strong>
+                      </div>
+                      <div className="comment">
+                        <Rate disabled value={review.rating} />
+                        <p className="content">{review.comment}</p>
+                        <p className="comment-time">{review.createdAt.substring(0, 10)}</p>
+                      </div>
+                    </li>
+                  ))}
+                  
+                </ul>        
+            </StyledComment>
             </Col>
           </Row>
         </StyledCart>
@@ -179,6 +206,79 @@ const ProductDetail = () => {
 }
 
 export default ProductDetail
+
+const StyledComment = styled.div`
+  margin-top: 10px;
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .comment-item {
+    display: flex;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+  }
+  .avatar {
+    width: 30%;
+    .user-name {
+      margin-left: 10px;
+      color: #333;
+      font-weight: bold;
+    }
+  }
+  .comment {
+    width: 70%;
+    .content, .comment-time {
+      margin-top: 10px;
+    }
+    .content {
+      font-size: 16px;
+    }
+    .comment-time {
+      color: #666;
+      text-align: right;
+    }
+  }
+  .form-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .textarea {
+    resize: none;
+    font-size: 14px;
+    padding: 8px;
+    line-height: 16px;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+  }
+  .textarea:hover {
+    border-color: 0;
+    outline: none;
+  }
+  .textarea:focus {
+    outline: none;
+    border-color: 0;
+    box-shadow: 0;
+  }
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      border: 0;
+      background: #555;
+      color: #fff;
+      padding: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        background: #888;
+      }
+    }
+  }
+`
 
 const StyledCart = styled.div`
   margin: 20px 0;
