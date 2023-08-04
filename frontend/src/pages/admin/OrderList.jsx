@@ -72,7 +72,7 @@ const OrderList = () => {
       key: 'action',
       render: (text, record) => (
       <>
-        <button onClick={() => navigate(`/order/${record.orderID}`)}>訂單詳情</button> 
+        <StyledButton onClick={() => navigate(`/order/${record.orderID}`)}>訂單詳情</StyledButton> 
       </>)
     }
   ];
@@ -112,3 +112,17 @@ const OrderList = () => {
 }
 
 export default OrderList
+
+const StyledButton = styled.button`
+  border: 0;
+  padding: 4px 8px;
+  background: #eee;
+  cursor: pointer;
+  margin-right: 8px;
+  background: #184670;
+  color: #fff;
+  transition: all 0.3s;
+  &:hover {
+    background: #1d568c;
+  }
+`

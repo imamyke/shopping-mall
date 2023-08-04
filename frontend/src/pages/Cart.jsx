@@ -188,6 +188,13 @@ const StyledTable = styled.div`
         left: 50%;
         transform: translate(-50%, -50%);
       }
+      .delete.td-item {
+        border: 0;
+        padding: 4px 8px;
+        background: #eee;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
     }
   }
   .stepper {

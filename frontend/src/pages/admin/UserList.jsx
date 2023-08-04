@@ -65,8 +65,8 @@ const UserList = () => {
       key: 'action',
       render: (text, record) => (
       <>
-        <button onClick={() => handleDelete(record.userID)}>删除</button> 
-        <button onClick={() => navigate(`/admin/users/${record.userID}/edit`)}>修改</button> 
+        <StyledButton onClick={() => handleDelete(record.userID)}>删除</StyledButton> 
+        <StyledButton onClick={() => navigate(`/admin/users/${record.userID}/edit`)}>修改</StyledButton> 
       </>)
     }
   ];
@@ -104,3 +104,17 @@ const UserList = () => {
 }
 
 export default UserList
+
+const StyledButton = styled.button`
+  border: 0;
+  padding: 4px 8px;
+  background: #eee;
+  cursor: pointer;
+  margin-right: 8px;
+  background: #184670;
+  color: #fff;
+  transition: all 0.3s;
+  &:hover {
+    background: #1d568c;
+  }
+`
