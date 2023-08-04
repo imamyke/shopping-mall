@@ -184,6 +184,7 @@ const StyledLoginContainer = styled.div`
       button {
         width: 100px;
         font-size: 14px;
+        cursor: pointer;
       }
       button:disabled {
         color: #fb5d5a;
@@ -196,6 +197,7 @@ const StyledLoginContainer = styled.div`
       font-size: 16px;
       color: #fff;
       background: #fb5d5a;
+      cursor: pointer;
     }
     .signup-link {
       text-decoration: none;
