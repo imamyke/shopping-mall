@@ -20,6 +20,8 @@ import {
   ProfileOutlined,
   ContainerOutlined
 } from '@ant-design/icons';
+import { Modal } from 'antd';
+
 const service = [
   { name: '企业购', icon: <BankOutlined />, color: '#5aaae5' },
   { name: '礼品卡', icon: <GiftOutlined />, color: '#f2a234' },
@@ -75,18 +77,26 @@ const Home = () => {
   const dispatch = useDispatch()
   const results = useSelector(state => state.productList)
   const { loading, productList } = results
-  
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
-  
-  const userDetail = useSelector(state => state.userDetail)
-  const { loading: loadingUserDetail, user } = userDetail
-  // 搜尋
-  const { keyword } = useParams()
+  const [open, setOpen] = useState(true);
+
   const primaryCards = [
     { image: 'https://img11.360buyimg.com/babel/s580x740_jfs/t1/158508/36/30610/43629/6424fd45F620bb591/811388c560f59787.jpg!cc_290x370.avif',},
     { image: 'https://img20.360buyimg.com/babel/s580x740_jfs/t1/61765/22/23208/26498/6398130dEf8997877/f09f3f45f4cf89c8.png!cc_290x370.avif',},
   ]
+  const PopupModal = () => (
+    <Modal
+      title="为你推荐"
+      open={open}
+      onCancel={() => setOpen(false)}
+      onOk={() => setOpen(false)}
+    >
+      <img width="100%" src={primaryCards[0].image} alt={primaryCards[0].image} />
+    </Modal>
+  )
+  // 搜尋
+  const { keyword } = useParams()
   useEffect(() => {
     dispatch(productListAction(keyword))
   },[dispatch, keyword])
@@ -94,10 +104,27 @@ const Home = () => {
     dispatch(logout())
   }
 
+  useEffect(() => {
+    const popupHistory = JSON.parse(localStorage.getItem('shop:popup.history'))
+    if (popupHistory) {
+      // popupHistory && Date.now() - popupHistory.time < 24 * 60 *60 *1000
+      setOpen(false)
+    } else {
+      const history = {
+        time: Date.now(),
+        productId: 'PopupModal'
+      }
+      localStorage.setItem('shop:popup.history', JSON.stringify(history))
+    }
+  }, [])
+
+
+
   return (
     <>
       <Meta />
       <DefaultTemplate>
+        <PopupModal />
         { loading && <Loader /> }
         { !keyword && (
           <Row gutter={12} style={{ marginBottom: 20 }}>

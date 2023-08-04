@@ -104,8 +104,8 @@ const ProductList = () => {
   ))
   return (
     <>
-      <Meta title="产品管理" />
-      <BackgroundDefault title="产品列表" buttonTitle="添加产品" onClick={handleCreate}>
+      <Meta title="商品管理" />
+      <BackgroundDefault title="商品列表" buttonTitle="添加商品" onClick={handleCreate}>
         { loadingDelete && <Loader /> }
         { loadingCreate && <Loader /> }
         { loading ? <Loader /> : (

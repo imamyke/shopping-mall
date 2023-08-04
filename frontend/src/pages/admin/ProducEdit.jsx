@@ -99,8 +99,8 @@ const ProductEdit = () => {
   }
   return (
     <>
-      <Meta title="编辑产品信息" />
-      <BackgroundDefault title="编辑产品信息">
+      <Meta title="编辑商品信息" />
+      <BackgroundDefault title="编辑商品信息">
         { loading ? <Loader /> : (
           <StyledForm onSubmit={handleSubmit}>
             <div className='form-item'>
