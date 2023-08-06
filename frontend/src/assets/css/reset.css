@@ -69,6 +69,7 @@ html { /* 100/75*100 */
 }
 body {
   font-size: 12px;
+	font-family: 'Roboto', sans-serif;
 }
 
 /* 自定義 */

@@ -194,7 +194,6 @@ const ProductDetail = () => {
                       </div>
                     </li>
                   ))}
-                  
                 </ul>        
             </StyledComment>
             </Col>
